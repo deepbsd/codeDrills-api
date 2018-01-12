@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: 2mkeDda80WllES/3/22yqbt9LneNpqHXUctkKlpnu3FUk7OIrdmVxBbJEk5JKy4uqyUay4TtC7NyrnAbHZ/0L+lUM1uoEHuXhloQat2uTx8fSl2hIvjXfab1VhVUm7lYktUZIMc/8FTQ7sZgZ1Qzl6xQlI/zFEWEOc+Tp5n9jFx0OWrHV1/VWxrVA9rKGDyCcqHuF+S1c66Bci8i0UCoSVt2RTS2FP9+iOTIOOFObpr6etslTcQxNhMx0vnjP8Z2ogsB9qREsL/zOwLifDzu+VVVmwpjTR5vc61tnxrLDDNGkc73TFIgO/DxHCCpk7RN+zmBRiFuwIlnkGWtfjvTTykORTkzZUQ2obRSU9Ujx37ElLL1C71zG25NwgytnTbDm9vgcbG0x9k0XFSx+rX0KorZ5HzjLkeNa17O44SM9ImYYZosgYIc+2NV8s+1NscYqxR2hysQzgJihI/NEhd0sktVEwk3CFQI4Pl6m4DeO3ztaolrAWrwupXlLB2hxrV5DN4O33LPV8od0buEGJYVd98OkUQH+/T4sf3at5jh9QwvwBm85wB39o6Oz0t8yE/W9SugwnWe1w9dzFjU6gzRpgcAVGukDoARDFfxiKU8h5Cg+Y23oBSVbVMaeowNlq/ijllAvs8jdOO4zkpSLSbVk2nqMDIgbnkgWlKRB5XcN/Q=
+  app: murmuring-badlands-58055
+  on:
+    repo: deepbsd/codeDrills-api
