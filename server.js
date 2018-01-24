@@ -19,7 +19,7 @@ app.use(cors());
 //   res.json({ok: true});
 // });
 
-app.get('/api/*', function (req, res, next) => {
+app.get('/api/*',  (req, res, next) => {
   res.json({msg: 'This is CORS-enabled for all origins!'})
 })
 
