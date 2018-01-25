@@ -1,0 +1,141 @@
+
+{
+  "number": 1,
+  "category": "html",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "Why is it generally a good idea to position CSS <link>s between <head></head> and JS <script>s just before </body>?",
+  "answers": [
+    {"answerText": "To have the CSS ready so the page can render properly yet not try to execute the JS until the page elements have fully rendered", chosen: false, correct: true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 2,
+  "category": "html",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "What does a doctype declaration do?",
+  "answers": [
+    {"answerText": "Specifies the Document Type Definition (DTD) and its version", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 3,
+  "category": "html",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "Identify which of the following are HTML5 elements?",
+  "answers": [
+    {"answerText": "article, aside, section, main, nav, aside, summary, time, figure, figcaption, footer, header, mark, details", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 4,
+  "category": "css",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "What is the difference between classes and IDs in CSS?",
+  "answers": [
+    {"answerText": "Use IDs to target one element, styles to target many elements", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+"  number: 5,
+"  "category": "css",
+  "assetUrl": "question5",
+  "type": "image",
+  "question": "Describe how the divs below are floated.",
+  "answers": [
+    {"answerText": "Box2 and Box3 are floated left inside an enclosing div. Box1 is outside that enclosing div.  Float is cleared before Box4.", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 6,
+  "category": "css",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "What does * { box-sizing: border-box; } do? What are its advantages?",
+  "answers": [
+    {"answerText": "You don't have to include margin and padding in height/width size percentages.", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 7,
+  "category": "css",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "What's the difference between inline and inline-block and block?",
+  "answers": [
+    {"answerText": "inline is default, everything on single line; inline-block allows elements on line but allows height and width measurements as with block items; block is how divs and sections are treated by default.", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 8,
+  "category": "css",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "Describe pseudo-elements and discuss what they are used for.",
+  "answers": [
+    {"answerText": "A CSS pseudo-element is used to style specified parts of an element. For example, it can be used to: Style the first letter, or line, of an element. Insert content before, or after, the content of an element.", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 9,
+  "category": "js",
+  "assetUrl": "question9",
+  "type": "image",
+  "question": "Here's a class.  How would you instantiate this class?",
+  "answers": [
+    {"answerText": "const joe = new Person('Joe');", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+},
+{
+  "number": 10,
+  "category": "js",
+  "assetUrl": null,
+  "type": "multipleChoice",
+  "question": "When would you not use an arrow function rather than a es5 function?",
+  "answers": [
+    {"answerText": "Defining a method on a prototype object.", "chosen": false, "correct": true},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false},
+    {"answerText": "blah", "chosen": false}
+  ]
+}
