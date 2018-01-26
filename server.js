@@ -20,7 +20,7 @@ app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(cors());
 
-const {Questions} = require('./models');
+const {Questions} = require('./src/js/models');
 
 
 
