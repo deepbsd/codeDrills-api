@@ -1,7 +1,9 @@
+const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const morgan = require('morgan');
 const app = express();
-
-
 
 const {DATABASE_URL, PORT} = require('./config');
 
@@ -13,13 +15,14 @@ const {DATABASE_URL, PORT} = require('./config');
 //         origin: CLIENT_ORIGIN
 //     })
 // );
-const cors = require('cors');
 
+app.use(morgan('common'));
+app.use(bodyParser.json());
+app.use(cors());
 
 const {Questions} = require('./models');
 
 
-app.use(cors());
 
 // app.get('/api/*', (req, res) => {
 //   res.json({ok: true});
