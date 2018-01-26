@@ -6,15 +6,18 @@ const jsonParser = bodyParser.json();
 
 router.use(jsonParser);
 
-const {Questions} = require('./models');
+const {Question} = require('./models');
 
 // get request at /guns
 router.get('/', (req,res) => {
-  Questions
+  Question
   .find()
   .exec()
-  .then(question => {
-    res.json(question.map(question => question.apiRepr()));
+  .then(questions => {
+    console.log('Yo! Dude!',questions);
+    res.json({
+      questions: questions.map(question => question.apiRepr())
+    });
   })
   .catch(err => {
     console.error(err);

@@ -34,7 +34,7 @@ const questionSchema = mongoose.Schema({
 // this is an *instance method* which will be available on all instances
 // of the model. This method will be used to return an object that only
 // exposes *some* of the fields we want from the underlying data
-questionSchema.methods.serialize = function() {
+questionSchema.methods.apiRepr = function() {
 
   return {
     id: this._id,
@@ -48,6 +48,6 @@ questionSchema.methods.serialize = function() {
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
-const Questions = mongoose.model('Questions', questionSchema);
+const Question = mongoose.model('Question', questionSchema);
 
-module.exports = {Questions};
+module.exports = {Question};
