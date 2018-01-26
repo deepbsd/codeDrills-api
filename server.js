@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 
-const PORT = process.env.PORT || 4000;
+
+
+const {DATABASE_URL, PORT} = require('./config');
 
 // const cors = require('cors');
 // const {CLIENT_ORIGIN} = require('./config');
