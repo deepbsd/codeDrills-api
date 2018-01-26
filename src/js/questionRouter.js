@@ -14,7 +14,7 @@ router.get('/', (req,res) => {
   .find()
   .exec()
   .then(question => {
-    res.json(question.map(question => gun.apiRepr()));
+    res.json(question.map(question => question.apiRepr()));
   })
   .catch(err => {
     console.error(err);

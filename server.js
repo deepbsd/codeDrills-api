@@ -36,9 +36,9 @@ app.use( '/js', express.static(__dirname + '/src/js') );
 mongoose.Promise = global.Promise;
 
 
-app.use('*', function(req, res) {
-  res.status(404).json({message: 'Not Found'});
-});
+// app.use('*', function(req, res) {
+//   res.status(404).json({message: 'Not Found'});
+// });
 
 
 // closeServer needs access to a server object, but that only
