@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 // this is our schema to represent a restaurant
 const questionSchema = mongoose.Schema({
   number: {type: Number, required: true},
+  question: {type: String, required: true},
   category: {type: String, required: true},
   assetUrl: {type: String, required: false},
   type: {type: String, required: true},
@@ -39,6 +40,7 @@ questionSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     number: this.number,
+    question: this.question,
     category: this.category,
     assetUrl: this.assetUrl,
     type: this.type,
