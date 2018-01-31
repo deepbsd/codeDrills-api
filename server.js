@@ -23,6 +23,8 @@ const {question} = require('./src/js/models');
 // We need database schemas for each endpoints
 const questionRouter = require('./src/js/questionRouter');
 app.use('/api/questions', questionRouter);
+const mockDataRouter = require('./src/js/mockDataRouter');
+app.use('/mock/user', mockDataRouter);
 
 
 mongoose.Promise = global.Promise;
