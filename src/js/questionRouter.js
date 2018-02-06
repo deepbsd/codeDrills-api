@@ -8,7 +8,7 @@ router.use(jsonParser);
 
 const {Question} = require('./models');
 
-// get request at /guns
+
 router.get('/', (req,res) => {
   Question
   .find()

@@ -14,8 +14,8 @@ app.use(cors());
 
 
 
-const {question} = require('./src/js/models');
-
+const {Question} = require('./src/js/models');
+const {UserData} = require('./src/js/userDataModel');
 
 
 // app.use( '/api/js', express.static(__dirname + '/src/js') );

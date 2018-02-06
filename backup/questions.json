@@ -6,7 +6,7 @@
   "type": "multipleChoice",
   "question": "Why is it generally a good idea to position CSS <link>s between <head></head> and JS <script>s just before </body>?",
   "answers": [
-    {"answerText": "To have the CSS ready so the page can render properly yet not try to execute the JS until the page elements have fully rendered", chosen: false, correct: true},
+    {"answerText": "To have the CSS ready so the page can render properly yet not try to execute the JS until the page elements have fully rendered", "chosen": false, "correct": true},
     {"answerText": "blah", "chosen": false},
     {"answerText": "blah", "chosen": false},
     {"answerText": "blah", "chosen": false},

@@ -6,98 +6,23 @@ const jsonParser = bodyParser.json();
 
 router.use(jsonParser);
 
+const {UserData} = require('./userDataModel');
+
+
 router.get('/', (req, res) => {
-  res.json({
-      "currentUser": {
-        "user": {
-          "username": "Joe",
-          "firstName": "Joe",
-          "lastName": "Blow",
-          "email": "joeblow@whatever.com",
-          "password": "sonorapass"
-        },
-        "userData": {
-          "missedQuestions": [],
-          "numberOfQuizzes": 20,
-          "totalQuestions": 200,
-          "totalCorrect": 187,
-          "jsQuestionsAnswered": 60,
-          "jsQuestionsCorrect": 50,
-          "cssQuestionsAnswered": 45,
-          "cssQuestionsCorrect": 42,
-          "htmlQuestionsAnswered": 35,
-          "htmlQuestionsCorrect": 35,
-          "nodeQuestionsAnswered": 30,
-          "nodeQuestionsCorrect": 28,
-          "apiQuestionsAnswered": 30,
-          "apiQuestionsCorrect": 29,
-          "mongoQuestionsAnswered": 5,
-          "mongoQuestionsCorrect": 5
-        },
-        "lastQuizData": {
-          "totalQuestions": 10,
-          "dateOfQuiz": "2017-06-12T16:08:00",
-          "totalCorrect": 9,
-          "timeOnQuiz": 1000340
-        },
-        "missedMost": {
-          "category": "Vanilla Javascript",
-          "moreThan3": [5, 18, 45],
-          "neverCorrect": {
-            "question": "What's the difference between \"let\" and \"var\"?",
-            "lastAnswer": "\"let\" is not a constant",
-            "choices": ["\"let\" is ES5", "\"var\" is ES5", "\"let\" is ES6", "\"let\" pollutes the parent namespace", "\"var\" is not what the cool kids do anymore"],
-            "correctAnswer": "\"let\" is ES6"
-          }
-        },
-        "chartData": {
-          "labels": ["JS Questions Answered", "JS Questions Correct", "CSS Questions Answered", "CSS Questions Correct", "HTML Questions Answered", "HTML Questions Correct", "Node Questions Answered", "Node Questions Correct", "API Questions Answered", "API Questions Correct", "MongoDB Questions Answered", "MongoDB Questions Correct"],
-          "datasets": [{
-            "label": "Questions Correctly Answered",
-            "data": [60, 50, 45, 42, 35, 35, 30, 28, 30, 29, 30, 27],
-            "backgroundColor": ["purple", "thistle", "orange", "yellow", "#0033ff", "cyan", "crimson", "#ff0066", "green", "lime", "#f48f42", "#f46242"]
-          }]
-        },
-        "radarData": {
-          "labels": ["JS Pct", "CSS Pct", "HTML Pct", "Node Pct", "API Pct", "MongoDB Pct"],
-          "datasets": [
-            {
-              "label": "Overall Percentages",
-              "backgroundColor": "rgba(255, 204, 204,0.7)",
-              "borderColor": "rgba(255,99,132,1)",
-              "pointBackgroundColor": "rgba(255,99,132,1)",
-              "pointBorderColor": "#fff",
-              "pointHoverBackgroundColor": "#fff",
-              "pointHoverBorderColor": "rgba(255,99,132,1)",
-              "data": [.833, .933, 1, .933, .966, .966]
-            },
-            {
-              "label": "Latest Percentages",
-              "backgroundColor": "rgba(255, 200, 132,0.7)",
-              "borderColor": "rgba(255,99,132,1)",
-              "pointBackgroundColor": "rgba(255,99,132,1)",
-              "pointBorderColor": "#fff",
-              "pointHoverBackgroundColor": "#fff",
-              "pointHoverBorderColor": "rgba(255,99,132,1)",
-              "data": [.966, 1, .9714, .966, .966, 1]
-            }
-          ]
-        },
-        "polarData": {
-          "labels": ["JS Pct", "CSS Pct", "HTML Pct", "Node Pct", "API Pct"],
-          "datasets": [{
-            "label": "Questions Correctly Answered",
-            "backgroundColor": ["purple", "thistle", "orange", "yellow", "#0033ff", "cyan", "crimson", "#ff0066", "green", "lime", "#f48f42", "#f46242"],
-            "borderColor": "rgba(255,99,132,1)",
-            "pointBackgroundColor": "rgba(255,99,132,1)",
-            "pointBorderColor": "#fff",
-            "pointHoverBackgroundColor": "#fff",
-            "pointHoverBorderColor": "rgba(255,99,132,1)",
-            "data": [.833, .933, 1, .933, .966, .966]
-          }]
-        }
-      }
+  UserData
+  .find()
+  .exec()
+  .then(userdata => {
+    console.log('Yo! Da Data, Dude!',userdata);
+    res.json({
+      userdata: userdata.map(userdata => userdata.apiRepr())
     });
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({error: 'something went terribly wrong'});
+  });
 });
 
 

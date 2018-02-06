@@ -18,6 +18,7 @@ const questionSchema = mongoose.Schema({
   ],
 });
 
+
 // // *virtuals* (http://mongoosejs.com/docs/guide.html#virtuals)
 // // allow us to define properties on our object that manipulate
 // // properties that are stored in the database. Here we use it
@@ -35,6 +36,7 @@ const questionSchema = mongoose.Schema({
 // this is an *instance method* which will be available on all instances
 // of the model. This method will be used to return an object that only
 // exposes *some* of the fields we want from the underlying data
+
 questionSchema.methods.apiRepr = function() {
 
   return {
@@ -47,6 +49,7 @@ questionSchema.methods.apiRepr = function() {
     answers: this.answers
   };
 }
+
 
 // note that all instance methods and virtual properties on our
 // schema must be defined *before* we make the call to `.model`.
