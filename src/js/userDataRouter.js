@@ -9,18 +9,33 @@ router.use(jsonParser);
 const {UserData} = require('./userDataModel');
 
 
+// router.get('/', (req, res) => {
+//   return UserData
+//   .findOne()
+//   .exec()
+//   .then(userdata => res.json(userdata.apiRepr()))
+//   .catch(err => {
+//     console.error(err.message);
+//     res.status(500).json({error: 'something went terribly wrong'});
+//   });
+// });
+
+
 router.get('/', (req, res) => {
-  UserData
-  .find()
+  return UserData
+  .findOne()
   .exec()
-  .then(userdata => res.json(userdata.apiRepr()))
+  .then(userdata => {
+    res.json({
+      userdata: userdata.apiRepr()
+    })
+  })
   .catch(err => {
-    console.error(err.message);
+    console.log('MESSAGE: ', err.message);
+    console.error('DETAILS: ',err);
     res.status(500).json({error: 'something went terribly wrong'});
   });
 });
-
-
 
 
 

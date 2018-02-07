@@ -5,6 +5,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 
+mongoose.Promise = global.Promise;
+
 const {DATABASE_URL, PORT} = require('./config');
 
 
@@ -27,7 +29,7 @@ const userDataRouter = require('./src/js/userDataRouter');
 app.use('/api/userdata', userDataRouter);
 
 
-mongoose.Promise = global.Promise;
+
 
 
 // app.use('*', function(req, res) {

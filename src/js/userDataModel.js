@@ -48,69 +48,22 @@ const chartDataSchema = mongoose.Schema({
 
 const userDataSchema = mongoose.Schema({
   currentUser: {
-    user: { userSchema },
-    userData: { quizDataSchema },
-    lastQuizData: { lastQuizDataSchema },
-    chartData: { chartDataSchema }
+    user: userSchema,
+    userData: quizDataSchema,
+    lastQuizData: lastQuizDataSchema,
+    chartData: chartDataSchema
   }
 });
 
-userSchema.methods.apiRepr = function() {
-  return {
-    id: this._id,
-    username: this.username,
-    firstName: this.firstName,
-    lastName: this.lastName,
-    email: this.email,
-    password: this.password
-  }
-}
-
-quizDataSchema.methods.apiRepr = function() {
-  return {
-    missedQuestions: this.missedQuestions,
-    numberOfQuizzes: this.numberOfQuizzes,
-    totalQuestions: this.totalQuestions,
-    totalCorrect: this.totalCorrect,
-    jsQuestionsAnswered: this.jsQuestionsAnswered,
-    jsQuestionsCorrect: this.jsQuestionsCorrect,
-    cssQuestionsAnswered: this.cssQuestionsAnswered,
-    cssQuestionsCorrect: this.cssQuestionsCorrect,
-    htmlQuestionsAnswered: this.htmlQuestionsAnswered,
-    htmlQuestionsCorrect: this.htmlQuestionsCorrect,
-    nodeQuestionsAnswered: this.nodeQuestionsAnswered,
-    nodeQuestionsCorrect: this.nodeQuestionsCorrect,
-    apiQuestionsAnswered: this.apiQuestionsAnswered,
-    apiQuestionsCorrect: this.apiQuestionsCorrect,
-    mongoQuestionsAnswered: this.mongoQuestionsAnswered,
-    mongoQuestionsCorrect: this.mongoQuestionsCorrect
-  }
-}
-
-lastQuizDataSchema.methods.apiRepr = function() {
-  return {
-    totalQuestions: this.totalQuestions,
-    dateOfQuiz: this.dateOfQuiz,
-    totalCorrect: this.totalCorrect
-  }
-}
-
-chartDatasetSchema.methods.apiRepr = function() {
-  return {
-    label: this.label,
-    data: this.data,
-    backgroundColor: this.backgroundColor
-  }
-}
 
 userDataSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     currentUser: {
-      user: this.user,
-      userData: this.userData,
-      lastQuizData: this.lastQuizData,
-      chartData: this.chartData
+      user: this.currentUser.user,
+      userData: this.currentUser.userData,
+      lastQuizData: this.currentUser.lastQuizData,
+      chartData: this.currentUser.chartData
     }
   }
 }
