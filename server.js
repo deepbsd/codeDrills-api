@@ -5,6 +5,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 
+mongoose.Promise = global.Promise;
+
 const {DATABASE_URL, PORT} = require('./config');
 
 
@@ -14,8 +16,8 @@ app.use(cors());
 
 
 
-const {Question} = require('./src/js/models');
-const {UserData} = require('./src/js/userDataModel');
+// const {Question} = require('./src/js/models');
+// const {UserData} = require('./src/js/userDataModel');
 
 
 // app.use( '/api/js', express.static(__dirname + '/src/js') );
@@ -25,9 +27,6 @@ const questionRouter = require('./src/js/questionRouter');
 app.use('/api/questions', questionRouter);
 const userDataRouter = require('./src/js/userDataRouter');
 app.use('/api/userdata', userDataRouter);
-
-
-mongoose.Promise = global.Promise;
 
 
 // app.use('*', function(req, res) {
