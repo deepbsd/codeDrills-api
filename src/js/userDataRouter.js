@@ -13,14 +13,9 @@ router.get('/', (req, res) => {
   UserData
   .find()
   .exec()
-  .then(userdata => {
-    console.log('Yo! Da Data, Dude!',userdata);
-    res.json({
-      userdata: userdata.map(userdata => userdata.apiRepr())
-    });
-  })
+  .then(userdata => res.json(userdata.apiRepr()))
   .catch(err => {
-    console.error(err);
+    console.error(err.message);
     res.status(500).json({error: 'something went terribly wrong'});
   });
 });

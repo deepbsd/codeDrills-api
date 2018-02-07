@@ -31,7 +31,7 @@ const quizDataSchema = mongoose.Schema({
 
 const lastQuizDataSchema = mongoose.Schema({
   totalQuestions: {type: Number, required: true},
-  dateOfQuiz: {type: Date, required: true},
+  dateOfQuiz: {type: String, required: true},
   totalCorrect: {type: Number, required: true}
 });
 
@@ -105,8 +105,8 @@ chartDatasetSchema.methods.apiRepr = function() {
 
 userDataSchema.methods.apiRepr = function() {
   return {
+    id: this._id,
     currentUser: {
-      id: this._id,
       user: this.user,
       userData: this.userData,
       lastQuizData: this.lastQuizData,
@@ -114,8 +114,6 @@ userDataSchema.methods.apiRepr = function() {
     }
   }
 }
-
-
 
 const UserData = mongoose.model('UserData', userDataSchema);
 
