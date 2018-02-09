@@ -5,11 +5,11 @@
 # is in sync with the local database.
 
 local_host='localhost:8080'
-local_file='questions.json'
+local_file='userData.json'
 remote_host='ds115758.mlab.com'
 remote_port=15758
 db='codedrills'
-collection='questions'
+collection='userdatas'
 
 user='deepbsd'
 pass='2D33p4m3!'
