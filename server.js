@@ -28,7 +28,15 @@ app.use('/api/questions', questionRouter);
 const userDataRouter = require('./src/js/userDataRouter');
 app.use('/api/userdata', userDataRouter);
 
+//**
 
+app.post('/api/userdata/login', (req, res) => {
+    	let {username, password} = req.body;
+      res.json({
+        username: username,
+        password: password
+      })
+})
 
 
 

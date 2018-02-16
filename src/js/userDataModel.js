@@ -1,9 +1,10 @@
 'use strict';
+const bcrypt = require('bcryptjs');
 
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-  username: {type: String, required: true},
+  username: {type: String, required: true, unique: true},
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
   email: {type: String, required: true},
@@ -55,11 +56,19 @@ const userDataSchema = mongoose.Schema({
   }
 });
 
+userSchema.methods.validatePassword = function(password) {
+    return bcrypt.compare(password, this.password);
+};
+
+userSchema.statics.hashPassword = function(password) {
+    return bcrypt.hash(password, 10);
+};
 
 userDataSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     currentUser: {
+      username: this.username || '',
       user: this.currentUser.user,
       userData: this.currentUser.userData,
       lastQuizData: this.currentUser.lastQuizData,
@@ -71,3 +80,5 @@ userDataSchema.methods.apiRepr = function() {
 const UserData = mongoose.model('UserData', userDataSchema);
 
 module.exports = {UserData};
+
+// ==========

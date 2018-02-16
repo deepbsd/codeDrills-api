@@ -7,10 +7,10 @@
   "question": "Why is it generally a good idea to position CSS <link>s between <head></head> and JS <script>s just before </body>?",
   "answers": [
     {"answerText": "To have the CSS ready so the page can render properly yet not try to execute the JS until the page elements have fully rendered", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "It doesn't really matter where you put them.", "chosen": false},
+    {"answerText": "Because that's just the way we always have done it.", "chosen": false},
+    {"answerText": "Because the <link> tag is an empty element.", "chosen": false},
+    {"answerText": "Because the Link DOM object represents an HTML <link> element.", "chosen": false}
   ]
 }
 {
@@ -20,11 +20,11 @@
   "type": "multipleChoice",
   "question": "What does a doctype declaration do?",
   "answers": [
-    {"answerText": "Specifies the Document Type Definition (DTD) and its version", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "The <!DOCTYPE> declaration is not an HTML tag; it is an instruction to the web browser about what version of HTML the page is written in.", "chosen": false, "correct": true},
+    {"answerText": "This includes the Data Transfer Delimiter for HTTP methods.", "chosen": false},
+    {"answerText": "I don't always need this for the browser to know what version of HTML I am using.", "chosen": false},
+    {"answerText": "Specifies the Document Type Definition (DTD) and its version in HTML5.", "chosen": false},
+    {"answerText": "HTML 4.01 and HTML 5 both require a reference to the DTD in the doctype declaration.", "chosen": false}
   ]
 }
 {
