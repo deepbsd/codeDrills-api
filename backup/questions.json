@@ -32,13 +32,13 @@
   "category": "html",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "Identify which of the following are HTML5 elements?",
+  "question": "Identify which of the following are all HTML5 elements only?",
   "answers": [
     {"answerText": "article, aside, section, main, nav, aside, summary, time, figure, figcaption, footer, header, mark, details", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "aside, article, section, nav, summary, link, head, time", "chosen": false},
+    {"answerText": "details, article, main, nav, summary, code, head", "chosen": false},
+    {"answerText": "head, li, blockquote, main, section, mark", "chosen": false},
+    {"answerText": "mark, article, details, footer, a, i, em", "chosen": false}
   ]
 }
 {
