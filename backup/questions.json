@@ -63,10 +63,10 @@
   "question": "Describe how the divs below are floated.",
   "answers": [
     {"answerText": "Box2 and Box3 are floated left inside an enclosing div. Box1 is outside that enclosing div.  Float is cleared before Box4.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "There are no child divs here, only the parent.", "chosen": false},
+    {"answerText": "There are two sets of child divs.", "chosen": false},
+    {"answerText": "Float is cleared after Box4.", "chosen": false},
+    {"answerText": "There's no floating allowed here.", "chosen": false}
   ]
 }
 {
@@ -76,11 +76,11 @@
   "type": "multipleChoice",
   "question": "What does * { box-sizing: border-box; } do? What are its advantages?",
   "answers": [
-    {"answerText": "You don't have to include margin and padding in height/width size percentages.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "You don't have to include margin and padding in height/width size percentages in any divs.", "chosen": false, "correct": true},
+    {"answerText": "It's the same as for content-box as var as height/width percentage measurements go in any divs.", "chosen": false},
+    {"answerText": "The border value for all divs will receive a default value.", "chosen": false},
+    {"answerText": "The position value for all divs will be set to absolute.", "chosen": false},
+    {"answerText": "The border value for all divs cannot be set dynamically.", "chosen": false}
   ]
 }
 {
@@ -90,11 +90,11 @@
   "type": "multipleChoice",
   "question": "What's the difference between inline and inline-block and block?",
   "answers": [
-    {"answerText": "inline is default, everything on single line; inline-block allows elements on line but allows height and width measurements as with block items; block is how divs and sections are treated by default.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Inline is default, everything on single line; inline-block allows elements on line but allows height and width measurements as with block items; block is how divs and sections are treated by default.", "chosen": false, "correct": true},
+    {"answerText": "Both inline and inline-block allow height and width measurements; block elements can appear inline.", "chosen": false},
+    {"answerText": "They're basically all the same.", "chosen": false},
+    {"answerText": "The differences disappear when you give an element height and width values.", "chosen": false},
+    {"answerText": "There's virtually no difference between inline and block elements.", "chosen": false}
   ]
 }
 {
@@ -105,10 +105,10 @@
   "question": "Describe pseudo-elements and discuss what they are used for.",
   "answers": [
     {"answerText": "A CSS pseudo-element is used to style specified parts of an element. For example, it can be used to: Style the first letter, or line, of an element. Insert content before, or after, the content of an element.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "CSS pseudo-elements should not be used in best practice--only use authentic elements.", "chosen": false},
+    {"answerText": "You would not use a pseudo-element to describe the behavior of an element during a hover action.", "chosen": false},
+    {"answerText": "You can't use pseudo-elements to target child elements.", "chosen": false},
+    {"answerText": "Pseudo-elements are just for applying styles temporarily.", "chosen": false}
   ]
 }
 {
@@ -119,10 +119,10 @@
   "question": "Here's a class.  How would you instantiate this class?",
   "answers": [
     {"answerText": "const joe = new Person('Joe');", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "var joe = Person('Joe')", "chosen": false},
+    {"answerText": "let joe = new Person.name('Joe')", "chosen": false},
+    {"answerText": "let joe = new Joe.person('name')", "chosen": false},
+    {"answerText": "var joe = new Name.person('Joe')", "chosen": false}
   ]
 }
 {
@@ -132,11 +132,11 @@
   "type": "multipleChoice",
   "question": "When would you not use an arrow function rather than a es5 function?",
   "answers": [
-    {"answerText": "Defining a method on a prototype object.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Defining a method on a prototype object with an arrow function will throw an error.", "chosen": false, "correct": true},
+    {"answerText": "There's never a problem using an arrow function on a click handler.", "chosen": false},
+    {"answerText": "Go ahead and use an arrow function to define an object method.", "chosen": false},
+    {"answerText": "An arrow function is useful anywhere you need 'this' is defined.", "chosen": false},
+    {"answerText": "The context of 'this' is unimportant with arrow functions.", "chosen": false}
   ]
 }
 {
@@ -147,10 +147,10 @@
   "question": "Which of the following is an object:",
   "answers": [
     {"answerText": "{ 1: 'one', 2: 'two', 3: 'three'}", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "{ 1; 'one', 2; 'two', 3; 'three'}", "chosen": false},
+    {"answerText": "{ 'one' '1', 'two' '2', 'three' '3'}", "chosen": false},
+    {"answerText": "{ '1', one; '2', two; '3', three}", "chosen": false},
+    {"answerText": "{one '1', two '2', three '3'}", "chosen": false}
   ]
 }
 {
@@ -161,10 +161,10 @@
   "question": "What is event delegation and event bubbling?",
   "answers": [
     {"answerText": "Event delegation refers to the process of using event propagation (bubbling) to handle events at a higher level in the DOM than the element on which the event originated. It allows us to attach a single event listener for elements that exist now or in the future.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "You have to use event.target on each child element for the parent to know which child got the event action.", "chosen": false},
+    {"answerText": "Bubbling refers to parent elements and delegation refers to child elements.", "chosen": false},
+    {"answerText": "Don't worry, this never happens in JavaScript.", "chosen": false},
+    {"answerText": "Event delegation and event bubbling have nothing to do with each other.", "chosen": false}
   ]
 }
 {
@@ -175,10 +175,10 @@
   "question": "What is hoisting?",
   "answers": [
     {"answerText": "Hoisting is the JavaScript interpreter's action of moving all variable and function declarations to the top of the current scope. However, only the actual declarations are hoisted", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Variable initialized values are hoisted to the top of the current scope also.", "chosen": false},
+    {"answerText": "All variables and function names become accessible in the global namespace.", "chosen": false},
+    {"answerText": "Hoisting was a term coined by Brandon Eich in a bar after a conference.", "chosen": false},
+    {"answerText": "Hoisting referes to variable and function names being undefined until they are initialized.", "chosen": false}
   ]
 }
 {
