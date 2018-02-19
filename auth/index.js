@@ -1,5 +1,5 @@
 
-const {router, isLoggedIn} = require('./router');
+const {router} = require('./router');
 // const {localStrategy, jwtStrategy} = require('./strategies');
 // module.exports = {router, localStrategy, jwtStrategy, isLoggedIn};
-module.exports = {router, isLoggedIn};
+module.exports = {router};

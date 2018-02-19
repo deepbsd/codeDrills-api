@@ -78,7 +78,8 @@ userDataSchema.methods.apiRepr = function() {
 }
 
 const UserData = mongoose.model('UserData', userDataSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = {UserData};
+module.exports = {UserData, User};
 
 // ==========

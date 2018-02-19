@@ -189,10 +189,10 @@
   "question": "What is the difference between =, ==, and ===?",
   "answers": [
     {"answerText": "Assignment, comparison without type check, comparison with type check.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "== and === are really the same thing, = is just for assignment.", "chosen": false},
+    {"answerText": "== is an assignment of a value, and = means two items are equal.", "chosen": false},
+    {"answerText": "=== is only the same as == when the things being compared are strings.", "chosen": false},
+    {"answerText": "== is only the same as === when the things being compared are not strings.", "chosen": false}
   ]
 }
 {
@@ -200,11 +200,11 @@
   "category": "js",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "Example of Promise in jQuery.",
+  "question": "Which is an example of Promise in jQuery.",
   "answers": [
     {"answerText": "$( 'div' ).promise().done(function() { $( 'p' ).append( ' Finished! ' ); });", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
+    {"answerText": "var div = $( '<div>' ); div.promise().done( ( arg1 ) => {  alert( this === div && arg1 === div ); });", "chosen": false},
+    {"answerText": "", "chosen": false},
     {"answerText": "blah", "chosen": false},
     {"answerText": "blah", "chosen": false}
   ]

@@ -29,14 +29,16 @@ const userDataRouter = require('./src/js/userDataRouter');
 app.use('/api/userdata', userDataRouter);
 
 //**
+const {router} = require('./auth/router');
+app.use('/api/userdata/login', router);
 
-app.post('/api/userdata/login', (req, res) => {
-    	let {username, password} = req.body;
-      res.json({
-        username: username,
-        password: password
-      })
-})
+// app.post('/api/userdata/login', (req, res) => {
+//     	let {username, password} = req.body;
+//       res.json({
+//         username: username,
+//         password: password
+//       })
+// })
 
 
 
