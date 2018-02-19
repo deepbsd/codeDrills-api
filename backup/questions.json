@@ -202,11 +202,11 @@
   "type": "multipleChoice",
   "question": "Which is an example of Promise in jQuery.",
   "answers": [
-    {"answerText": "$( 'div' ).promise().done(function() { $( 'p' ).append( ' Finished! ' ); });", "chosen": false, "correct": true},
+    {"answerText": "$( 'div' ).promise().done(function() { $( 'p' ).append( ' Finished! ' ); });", "chosen": false},
     {"answerText": "var div = $( '<div>' ); div.promise().done( ( arg1 ) => {  alert( this === div && arg1 === div ); });", "chosen": false},
-    {"answerText": "", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "var promise = $.ajax({ url: '/serverEndpoint'}); promise.done(successFunction); promise.fail(errorFunction); promise.always(alwaysFunction);", "chosen": false},
+    {"answerText": "var promise = $.ajax({ url: '/serverEndpoint'}); promise.then(successFunction, errorFunction);", "chosen": false},
+    {"answerText": "All of these answers.", "chosen": false, "correct": true}
   ]
 }
 {
@@ -217,10 +217,10 @@
   "question": "In the example below, what would the expected output be for b?",
   "answers": [
     {"answerText": "hey", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "uh oh", "chosen": false},
+    {"answerText": "undefined", "chosen": false},
+    {"answerText": "[Function: myFunc]", "chosen": false},
+    {"answerText": "[Function: myFunc()]", "chosen": false}
   ]
 }
 {
@@ -230,11 +230,11 @@
   "type": "videoSnippet",
   "question": "What is this snippet explaining about Node.js?",
   "answers": [
-    {"answerText": "How the event loop works with the stack and the task queue.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "How the event loop works with the call stack and the task queue.", "chosen": false, "correct": true},
+    {"answerText": "How the browser api populates the call stack when it completes a task.", "chosen": false},
+    {"answerText": "How the call stack hands off to the event loop.", "chosen": false},
+    {"answerText": "How the task queue hands off to the web api.", "chosen": false},
+    {"answerText": "That Philip Roberts has amazing hair.", "chosen": false}
   ]
 }
 {
@@ -245,10 +245,10 @@
   "question": "What is an IIFE?",
   "answers": [
     {"answerText": "An immediately-invoked function expression (or IIFE, pronounced \"iffy\") is a JavaScript programming language idiom which produces a lexical scope using JavaScript's function scoping.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "An asynchronous function that depends on a condition being true.", "chosen": false},
+    {"answerText": "Internally Fixed Functional Expression.", "chosen": false},
+    {"answerText": "Instantly Fired Functional Expression.", "chosen": false},
+    {"answerText": "Sort of like a wedgie only less certain.", "chosen": false}
   ]
 }
 {
