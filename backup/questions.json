@@ -259,10 +259,10 @@
   "question": "What is the difference between passing by value and passing by reference?",
   "answers": [
     {"answerText": "Pass by reference is passing a reference to a memory location, where as passing by value is passing the actual value stored in the memory location.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "You can pass a pre-declared array or object by value, but not by reference.", "chosen": false},
+    {"answerText": "Primitive values are always passed by reference.", "chosen": false},
+    {"answerText": "If two arrays contain the same values, the arrays are equal.", "chosen": false},
+    {"answerText": "JSON.stringify can be useful in comparing the values of two arrays, because arrays are passed by value.", "chosen": false}
   ]
 }
 {
@@ -272,11 +272,11 @@
   "type": "image",
   "question": "Identify the callback in this example:",
   "answers": [
-    {"answerText": "It's the ES6 style function with the rocket operator.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "It's the ES6 style function with the rocket operator that's called by map.", "chosen": false, "correct": true},
+    {"answerText": "It's the ...comment inside the braces.", "chosen": false},
+    {"answerText": "It's the map function invoked on userComments.", "chosen": false},
+    {"answerText": "It's the first argument before the rocket operator.", "chosen": false},
+    {"answerText": "It's the rocket operator itself.", "chosen": false}
   ]
 }
 {
@@ -284,12 +284,12 @@
   "category": "node",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "What's the difference between import and require?",
+  "question": "What's the difference between import/export and require/module.exports?",
   "answers": [
-    {"answerText": "Require is CommonJS and import is ES6.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
+    {"answerText": "Require/module.exports is CommonJS and import/export is ES6.", "chosen": false, "correct": true},
+    {"answerText": "There is no difference, it's all transpiled by Babel.", "chosen": false},
+    {"answerText": "import() in ES6 is a function and import in CommonJS is the same, .", "chosen": false},
+    {"answerText": "As recently as a year ago, import/export had a significant performance advantage.", "chosen": false},
     {"answerText": "blah", "chosen": false}
   ]
 }
