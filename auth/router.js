@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const app = express();
 const router = express.Router();
-const {User} = require('../src/js/userDataModel');
+const {User, UserData} = require('../src/js/userDataModel');
 
 
 

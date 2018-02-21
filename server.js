@@ -30,7 +30,7 @@ app.use('/api/userdata', userDataRouter);
 
 //**
 const {router} = require('./auth/router');
-app.use('/api/userdata/login', router);
+app.use('/api/userdata/register', router);
 
 // app.post('/api/userdata/login', (req, res) => {
 //     	let {username, password} = req.body;
@@ -88,62 +88,6 @@ function closeServer() {
 }
 
 
-// app.get('/api/questions', (req, res, next) => {
-//   res.json(
-//     {
-//       questions:  [
-//       {
-//         number: 1,
-//         category: 'html',
-//         assetUrl: null,
-//         type: 'multipleChoice',
-//         question: "Why is it generally a good idea to position CSS <link>s between <head></head> and JS <script>s just before </body>?",
-//         answers: [
-//           {answerText: "To have the CSS ready so the page can render properly yet not try to execute the JS until the page elements have fully rendered", chosen: false, correct: true},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false}
-//         ]
-//       },
-//       {
-//         number: 2,
-//         category: 'html',
-//         assetUrl: null,
-//         type: 'multipleChoice',
-//         question: "What does a doctype declaration do?",
-//         answers: [
-//           {answerText: "Specifies the Document Type Definition (DTD) and its version", chosen: false, correct: true},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false}
-//         ]
-//       },
-//       {
-//         number: 3,
-//         category: 'html',
-//         assetUrl: null,
-//         type: 'multipleChoice',
-//         question: "Identify which of the following are HTML5 elements?",
-//         answers: [
-//           {answerText: "article, aside, section, main, nav, aside, summary, time, figure, figcaption, footer, header, mark, details", chosen: false, correct: true},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false},
-//           {answerText: "blah", chosen: false}
-//           ]
-//         }
-//       ]
-//     }
-//   )
-// });
-
-// app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-
-// app.listen(PORT,  () => console.log(`CORS-enabled web server listening on port ${PORT}`));
-//
-// module.exports = {app};
 
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
