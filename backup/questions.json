@@ -289,8 +289,8 @@
     {"answerText": "Require/module.exports is CommonJS and import/export is ES6.", "chosen": false, "correct": true},
     {"answerText": "There is no difference, it's all transpiled by Babel.", "chosen": false},
     {"answerText": "import() in ES6 is a function and import in CommonJS is the same, .", "chosen": false},
-    {"answerText": "As recently as a year ago, import/export had a significant performance advantage.", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "As recently as a year ago (2017), import/export had a significant performance advantage.", "chosen": false},
+    {"answerText": "There's never a memory advantage to selectively using named imports from ES6.", "chosen": false}
   ]
 }
 {
@@ -300,11 +300,11 @@
   "type": "multipleChoice",
   "question": "Name three module systems available in Node.js",
   "answers": [
-    {"answerText": "AMD, CommonJS, and ES6 or ES2015 Modules", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "AMD (Asynchronous Module Definition), CommonJS, and ES6 or ES2015 Modules", "chosen": false, "correct": true},
+    {"answerText": "Backbone.js, React.js, and ES2015 Modules", "chosen": false},
+    {"answerText": "System.js, Node.js, and Vue.js", "chosen": false},
+    {"answerText": "Postman, Require, Underscore.js", "chosen": false},
+    {"answerText": "Lunar Modules, Solar Modules, and Terran Modules", "chosen": false}
   ]
 }
 {
@@ -314,11 +314,11 @@
   "type": "multipleChoice",
   "question": "Why does console.log in a node file output to terminal instead of the console in the browser?",
   "answers": [
-    {"answerText": "Because the node command is not happening inside the browser.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Because the Node command is not happening inside the browser.", "chosen": false, "correct": true},
+    {"answerText": "Because there's a special switch in the browser for this output.", "chosen": false},
+    {"answerText": "Because Node is only compatable with some browsers.", "chosen": false},
+    {"answerText": "The output comes asychronously, so you don't see it in the browser until later.", "chosen": false},
+    {"answerText": "You can see it in the Apache webserver logs.", "chosen": false}
   ]
 }
 {
@@ -328,11 +328,11 @@
   "type": "multipleChoice",
   "question": "In `require('./express')`, what is express?",
   "answers": [
-    {"answerText": "A module depedency.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "An instruction to import a module depedency.", "chosen": false, "correct": true},
+    {"answerText": "A development method.", "chosen": false},
+    {"answerText": "An instruction to Node to be quick about it!", "chosen": false},
+    {"answerText": "A development environment.", "chosen": false},
+    {"answerText": "An interpreter for HTTP methods.", "chosen": false}
   ]
 }
 {
@@ -340,13 +340,13 @@
   "category": "node",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "What filename is contains all the module dependencies in a project?",
+  "question": "What filename contains all the module dependencies in a project?",
   "answers": [
     {"answerText": "package.json", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "server.js", "chosen": false},
+    {"answerText": "store.js", "chosen": false},
+    {"answerText": "gulpfile.js", "chosen": false},
+    {"answerText": "config.js", "chosen": false}
   ]
 }
 {
@@ -354,13 +354,13 @@
   "category": "node",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "Would gulp be a dev depenency or a dependency?",
+  "question": "Would gulp be a development depenency or a production dependency?",
   "answers": [
-    {"answerText": "dev dependency", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "A development dependency because it's not required by the production server.", "chosen": false, "correct": true},
+    {"answerText": "A production dependency because it runs on the server.", "chosen": false},
+    {"answerText": "Gulp is how everyone should do it, so it's a production dependency!", "chosen": false},
+    {"answerText": "Grunt and Broccoli are better, but all three are required in production.", "chosen": false},
+    {"answerText": "Just use Rhino in production and be done with it.", "chosen": false}
   ]
 }
 {
@@ -370,11 +370,11 @@
   "type": "multipleChoice",
   "question": "Choose the correct pair",
   "answers": [
-    {"answerText": "require/module.exports", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "require/module.exports", "chosen": false},
+    {"answerText": "import {module} from './module' /export default module", "chosen": false},
+    {"answerText": "import/export", "chosen": false},
+    {"answerText": "const {module} = require('./modulename')/export {module}", "chosen": false},
+    {"answerText": "They're all correct", "chosen": false, "correct": true}
   ]
 }
 {
@@ -385,10 +385,10 @@
   "question": "What's the difference between const {myObj} = require('./filename') and const myObj = require('./filename')",
   "answers": [
     {"answerText": "{myObj} is a named export that does not require a default export", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "('./filename') can export other functions without naming them.", "chosen": false},
+    {"answerText": "A module can export multiple default functions or classes.", "chosen": false},
+    {"answerText": "The curly braces have nothing to do with named exports.", "chosen": false},
+    {"answerText": "Named exports are never required or useful in JavaScript.", "chosen": false}
   ]
 }
 {
@@ -399,10 +399,10 @@
   "question": "What is Mongoose?",
   "answers": [
     {"answerText": "Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Mongoose is the key component in the Cobra toolchain.", "chosen": false},
+    {"answerText": "It's another database just like MongoDB.", "chosen": false},
+    {"answerText": "It's part of Express.js middleware.", "chosen": false},
+    {"answerText": "It's part of the npm framework of mystery and deception.", "chosen": false}
   ]
 }
 {
@@ -412,11 +412,11 @@
   "type": "multipleChoice",
   "question": "What does REST mean in RESTful API?",
   "answers": [
-    {"answerText": "Representational State Transfer, where state is transferred as an object", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Representational State Transfer, where state is transferred as an object.", "chosen": false, "correct": true},
+    {"answerText": "It means have compassion and don't work too hard--take breaks often.", "chosen": false},
+    {"answerText": "Relatively Synchronous Transfer of a state object.", "chosen": false},
+    {"answerText": "Relational State Transfer, where state is transferred as an object.", "chosen": false},
+    {"answerText": "That the DOM always remembers what it looked like 10 minutes ago.", "chosen": false}
   ]
 }
 {
@@ -427,10 +427,10 @@
   "question": "What is one advantage to a non-relational database over a relational database?",
   "answers": [
     {"answerText": "The database schema can be flexible and change without changing the relationships between tables, as it would with a relational database.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Relational databases relate better with human beings, while non-relational databases are for loners.", "chosen": false},
+    {"answerText": "Nonrelational databases are always faster than relational databases.", "chosen": false},
+    {"answerText": "Relational databases allow more flexibility in the in how one table of data relates to another table of data.", "chosen": false},
+    {"answerText": "Nonrelational databases depend on data being in tables and rows format.", "chosen": false}
   ]
 }
 {
@@ -441,10 +441,10 @@
   "question": "What's the difference between SQL and Non-SQL databases at a high level?",
   "answers": [
     {"answerText": "SQL databases store data in tables and rows using relational algebra; noSQL databases store data in collections of JSON documents", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "You never have to whiteboard your data models with noSQL databases.", "chosen": false},
+    {"answerText": "Both SQL and NoSQL databases use relational algebra.", "chosen": false},
+    {"answerText": "SQL databases handle JSON objects better than NoSQL databases.", "chosen": false},
+    {"answerText": "Both are equal in handling schemas that must be constantly de-normalized.", "chosen": false}
   ]
 }
 {
@@ -455,10 +455,10 @@
   "question": "What types of NoSQL databases are there?",
   "answers": [
     {"answerText": "Document-oriented, key-value, graph, column-oriented", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Object-oriented, tabular, row-oriented, binary", "chosen": false},
+    {"answerText": "Textual, UNIX-style, Microsoft, Apple", "chosen": false},
+    {"answerText": "Command line, web-driven, and server side", "chosen": false},
+    {"answerText": "DOM-friendly, UNIX-style, server-centric, and open source", "chosen": false}
   ]
 }
 {
@@ -469,10 +469,10 @@
   "question": "What kind of NoSQL database is MongoDB?",
   "answers": [
     {"answerText": "Document-oriented", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "key-value", "chosen": false},
+    {"answerText": "graph", "chosen": false},
+    {"answerText": "column-oriented", "chosen": false},
+    {"answerText": "real-time", "chosen": false}
   ]
 }
 {
@@ -483,10 +483,10 @@
   "question": "What is a namespace in MongoDB?",
   "answers": [
     {"answerText": "The namespace is a combination of the database name and the name of the collection or index...", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "The place that holds all the object ids.", "chosen": false},
+    {"answerText": "A namespace is where only variable names that have been hoisted reside.", "chosen": false},
+    {"answerText": "Event names that have been propagated wind up in the MongoDBs namespace.", "chosen": false},
+    {"answerText": "This is where the names of the authors of MongoDB are kept.", "chosen": false}
   ]
 }
 {
@@ -497,10 +497,10 @@
   "question": "What is the ObjectID composed of for a MongoDB record?",
   "answers": [
     {"answerText": "Timestamp, Client Machine ID, Client process ID, 3 byte incremented counter", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "Completely random numbers and characters", "chosen": false},
+    {"answerText": "The current year, Mongo version, partial Microsoft license number", "chosen": false},
+    {"answerText": "Language code, CPU archetecture, country code", "chosen": false},
+    {"answerText": "Collection name, random string of numbers, timestamp", "chosen": false}
   ]
 }
 {
@@ -511,10 +511,10 @@
   "question": "What are the two types of API functions in Node?",
   "answers": [
     {"answerText": "blocking and non-blocking", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "asynchronous and non-blocking", "chosen": false},
+    {"answerText": "blocking and synchronous", "chosen": false},
+    {"answerText": "synchronous and asynchronous", "chosen": false},
+    {"answerText": "good and bad", "chosen": false}
   ]
 }
 {
@@ -525,10 +525,10 @@
   "question": "What are endpoints?",
   "answers": [
     {"answerText": "Part of the URL after the domain where the router hands the browser to a different program on the website. ", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "That's where the API stops.", "chosen": false},
+    {"answerText": "The browser URL uses endpoints for server side PHP programs--endpoints don't apply to other server side languages.", "chosen": false},
+    {"answerText": "Endpoints are where the server and the client share only JSON data.", "chosen": false},
+    {"answerText": "They have something to do with the URL and that back-end server stuff.", "chosen": false}
   ]
 }
 {
@@ -536,13 +536,13 @@
   "category": "api",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "How and when would I use Postman?",
+  "question": "Why would I use Postman?",
   "answers": [
-    {"answerText": "To test an API before I have the front-end working with the back-end app.", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "To test an API's logic before you have the front-end client working with the back-end server.", "chosen": false, "correct": true},
+    {"answerText": "To mail your Christmas cards or send Seasons Greetings.", "chosen": false},
+    {"answerText": "Postman is a terrific email client.", "chosen": false},
+    {"answerText": "Postman helps you with HTTP POST methods.", "chosen": false},
+    {"answerText": "Because Postman dropped the MIT license and now it's a commercial success.", "chosen": false}
   ]
 }
 {
@@ -553,9 +553,9 @@
   "question": "What HTTP methods are supported by REST?",
   "answers": [
     {"answerText": "GET,POST,PUT,DELETE,OPTIONS,HEAD", "chosen": false, "correct": true},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false},
-    {"answerText": "blah", "chosen": false}
+    {"answerText": "OPTIONS,CALLS,PUTS,POSTS", "chosen": false},
+    {"answerText": "GETONE, GETMANY, FIND, POST", "chosen": false},
+    {"answerText": "RUNAWAY, COMEBACK, GOHOME, STAYHERE", "chosen": false},
+    {"answerText": "DELETE,CREATE,MODIFY,ENDSERVER", "chosen": false}
   ]
 }
