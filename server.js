@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
+//** bring in passport
+const passport = require('passport');
+
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -12,9 +17,9 @@ const {DATABASE_URL, PORT} = require('./config');
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
-// app.use(cors());
 
 // CORS
+app.use(cors());
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
@@ -38,8 +43,28 @@ const userDataRouter = require('./src/js/userDataRouter');
 app.use('/api/userdata', userDataRouter);
 
 //**
-const {router} = require('./auth/router');
-app.use('/api/userdata/register', router);
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+// A protected endpoint which needs a vlid JWT to access it
+app.get('/api/protected', jwtAuth, (req, res) => {
+  return res.json({
+    data: 'rosebud'
+  });
+});
+
+app.use('*', (req, res) => {
+  return res.status(404).json({ message: 'Not Found'})
+});
+// const {router} = require('./auth/router');
+// app.use('/api/userdata/register', router);
+
+//****
 
 // app.post('/api/userdata/login', (req, res) => {
 //     	let {username, password} = req.body;

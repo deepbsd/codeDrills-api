@@ -1,57 +1,34 @@
-
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+'use strict';
 const express = require('express');
 const passport = require('passport');
-const jsonParser = bodyParser.json();
+const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+
 const config = require('../config');
-const app = express();
 const router = express.Router();
-const {User, UserData} = require('../src/js/userDataModel');
 
+const createAuthToken = function(user) {
+  return jwt.sign({user}, config.JWT_SECRET, {
+    subject: user.username,
+    expiresIn: config.JWT_EXPIRY,
+    algorithm: 'HS256'
+  });
+};
 
+const localAuth = passport.authenticate('local', {session: false});
+router.use(bodyParser.json());
+// The user provides a username and password to login
+router.post('/login', localAuth, (req, res) => {
+  const authToken = createAuthToken(req.user.serialize());
+  res.json({authToken});
+});
 
-app.use(cookieParser());
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
-
-// app.post('/', (req, res) => {
-router.post('/', (req, res) => {
-	let {username, password} = req.body;
-  console.log('USERNAME: ',username);
-  return User.find({username})
-    .count()
-    .then(count => {
-      if (count > 0) {
-        return Promise.reject({  //c033
-          code: 422,
-          reason: 'ValidationError',
-          message: 'Username already taken',
-          location: 'username'
-        });
-      }
-      return User.hashPassword(password);  //c034
-    })
-    .then(hash => {
-      console.log('HASH: ', hash);
-      return User.create({
-        username,
-        password: hash
-      });
-    })
-    .then(user => {
-      res.json({
-        username: username,
-        password: password
-      })
-    })
-    .catch(err => {  //c035
-        if (err.reason === 'ValidationError') {
-          return res.status(err.code).json(err);
-        }
-        res.status(500).json({code: 500, message: 'Internal server error'});
-    });
-})
-
+// The user exchanges a valid JWT for a new one with a later expiration
+router.post('/refresh', jwtAuth, (req, res) => {
+  const authToken = createAuthToken(req.user);
+  res.json({authToken});
+});
 
 module.exports = {router};
