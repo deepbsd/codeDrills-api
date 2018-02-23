@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -61,6 +62,8 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 app.use('*', (req, res) => {
   return res.status(404).json({ message: 'Not Found'})
 });
+
+
 // const {router} = require('./auth/router');
 // app.use('/api/userdata/register', router);
 
