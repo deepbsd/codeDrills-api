@@ -65,6 +65,11 @@ const userDataSkeleton = {
 // This join endpoint isn't working yet, but I'm trying to spitball
 //  a function to create a new userData structure for when a user
 // registers a new account
+// As this stands it won't work now because it's not getting the user
+// info from that endpoint.  This should probably be in
+// server.js
+
+// ******THIS DOES NOT WORK*****  It's just an idea marker...
 router.get('/join', (req, res) => {
   let newUser;
   return User
@@ -72,6 +77,12 @@ router.get('/join', (req, res) => {
     function (data) {
       newUser.username = data.user.username;
       newUser.firstName = data.user.firstName;
+      newUser.lastName = data.user.lastName;
+      return newUser = {
+        username: newUser.username,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName
+      }
     }
   )
   .findOne()
