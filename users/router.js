@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 const {User} = require('./models');
 
+const {UserData} = require('../src/js/userDataModel');
+
 const router = express.Router();
 
 const jsonParser = bodyParser.json();
@@ -133,6 +135,22 @@ router.post('/', jsonParser, (req, res) => {
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
+
+
+// *** EXPERIMENTAL ENDPOINT ****
+router.get('/:username', (req,res) => {
+  const username = req.params.username;
+
+  return UserData.findOne({ "currentUser.user.username": username })
+    .then( data => {
+      console.log("***API: ",data)
+      res.json(data)
+    })
+    .catch( err => res.status(500).json( {message: 'fuck me to tears!'}));
+});
+
+
+
 
 // Never expose all your users like below in a prod application
 // we're just doing this so we have a quick way to see

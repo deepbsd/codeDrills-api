@@ -1,11 +1,11 @@
 {
     "currentUser": {
       "user": {
-        "username": "Joe",
-        "firstName": "Joe",
-        "lastName": "Blow",
-        "email": "joeblow@whatever.com",
-        "password": "sonorapass"
+        "username": "deepbsd",
+        "firstName": "Dave",
+        "lastName": "Jackson",
+        "email": "deepbsd@whatever.com",
+        "password": "password99"
       },
       "userData": {
         "missedQuestions": [],
@@ -30,14 +30,108 @@
         "dateOfQuiz": "2017-06-12T16:08:00",
         "totalCorrect": 9,
         "timeOnQuiz": 1000340
-      },
-      "chartData": {
-        "labels": ["JS Questions Answered", "JS Questions Correct", "CSS Questions Answered", "CSS Questions Correct", "HTML Questions Answered", "HTML Questions Correct", "Node Questions Answered", "Node Questions Correct", "API Questions Answered", "API Questions Correct", "MongoDB Questions Answered", "MongoDB Questions Correct"],
-        "datasets": [{
-          "label": "Questions Correctly Answered",
-          "data": [60, 50, 45, 42, 35, 35, 30, 28, 30, 29, 30, 27],
-          "backgroundColor": ["purple", "thistle", "orange", "yellow", "#0033ff", "cyan", "crimson", "#ff0066", "green", "lime", "#f48f42", "#f46242"]
-        }]
       }
     }
-  }
+}
+{
+      "currentUser": {
+        "user": {
+          "username": "matt",
+          "firstName": "Matt",
+          "lastName": "AceDev",
+          "email": "matt@acedevs.com",
+          "password": "password99"
+        },
+        "userData": {
+          "missedQuestions": [],
+          "numberOfQuizzes": 0,
+          "totalQuestions": 0,
+          "totalCorrect": 0,
+          "jsQuestionsAnswered": 0,
+          "jsQuestionsCorrect": 0,
+          "cssQuestionsAnswered": 0,
+          "cssQuestionsCorrect": 0,
+          "htmlQuestionsAnswered": 0,
+          "htmlQuestionsCorrect": 0,
+          "nodeQuestionsAnswered": 0,
+          "nodeQuestionsCorrect": 0,
+          "apiQuestionsAnswered": 0,
+          "apiQuestionsCorrect": 0,
+          "mongoQuestionsAnswered": 0,
+          "mongoQuestionsCorrect": 0
+        },
+        "lastQuizData": {
+          "totalQuestions": 0,
+          "dateOfQuiz": "1777-04-07T16:00:00",
+          "totalCorrect": 0
+        }
+      }
+}
+{
+        "currentUser": {
+          "user": {
+            "username": "matt1",
+            "firstName": "Mattie",
+            "lastName": "Kersplattie",
+            "email": "matt1@acedevs.com",
+            "password": "password99"
+          },
+          "userData": {
+            "missedQuestions": [],
+            "numberOfQuizzes": 0,
+            "totalQuestions": 0,
+            "totalCorrect": 0,
+            "jsQuestionsAnswered": 0,
+            "jsQuestionsCorrect": 0,
+            "cssQuestionsAnswered": 0,
+            "cssQuestionsCorrect": 0,
+            "htmlQuestionsAnswered": 0,
+            "htmlQuestionsCorrect": 0,
+            "nodeQuestionsAnswered": 0,
+            "nodeQuestionsCorrect": 0,
+            "apiQuestionsAnswered": 0,
+            "apiQuestionsCorrect": 0,
+            "mongoQuestionsAnswered": 0,
+            "mongoQuestionsCorrect": 0
+          },
+          "lastQuizData": {
+            "totalQuestions": 0,
+            "dateOfQuiz": "1777-04-07T16:00:00",
+            "totalCorrect": 0
+          }
+        }
+}
+{
+        "currentUser": {
+          "user": {
+            "username": "dsj",
+            "firstName": "David",
+            "lastName": "Jackson",
+            "email": "dsj@dsj.net",
+            "password": "password99"
+          },
+          "userData": {
+            "missedQuestions": [],
+            "numberOfQuizzes": 0,
+            "totalQuestions": 0,
+            "totalCorrect": 0,
+            "jsQuestionsAnswered": 0,
+            "jsQuestionsCorrect": 0,
+            "cssQuestionsAnswered": 0,
+            "cssQuestionsCorrect": 0,
+            "htmlQuestionsAnswered": 0,
+            "htmlQuestionsCorrect": 0,
+            "nodeQuestionsAnswered": 0,
+            "nodeQuestionsCorrect": 0,
+            "apiQuestionsAnswered": 0,
+            "apiQuestionsCorrect": 0,
+            "mongoQuestionsAnswered": 0,
+            "mongoQuestionsCorrect": 0
+          },
+          "lastQuizData": {
+            "totalQuestions": 0,
+            "dateOfQuiz": "1777-04-07T16:00:00",
+            "totalCorrect": 0
+          }
+        }
+}

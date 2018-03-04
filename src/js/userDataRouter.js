@@ -11,11 +11,12 @@ const {User} = require('../../users/models');
 
 router.get('/', (req, res) => {
   return UserData
-  .findOne()
+  .find()
   .exec()
   .then(userdata => {
+    console.log("API  --userData: ", userdata);
     res.json({
-      userdata: userdata.apiRepr()
+      userdata: userdata
     })
   })
   .catch(err => {
