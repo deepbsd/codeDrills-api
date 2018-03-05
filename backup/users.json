@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5a9d877ff5cf8563def336cc"},"username":"matt","password":"$2a$10$EIRsEk1baQjjHH6vO9/rF.SRrRp7Rm.UHgKPyQcsWHsZSptN0HTxC","lastName":"AceDev","firstName":"Matt","__v":0}
+{"_id":{"$oid":"5a9d879af5cf8563def336d0"},"username":"dsj","password":"$2a$10$LW8YkCZisdjHjFYM3jvb8udY9fIIYbXCbUNXmFF3b6hezZulFc19q","lastName":"Jackson","firstName":"David","__v":0}
+{"_id":{"$oid":"5a9d87b3f5cf8563def336d4"},"username":"deepbsd","password":"$2a$10$XpuRTFFlSBEgC/LZOI./Y.0brm/2SESG6cCsRxlrZVgbLgAzsnCze","lastName":"Jacksonish","firstName":"David","__v":0}
+{"_id":{"$oid":"5a9d87d2f5cf8563def336d8"},"username":"matt1","password":"$2a$10$JKLlNRgY0L2T4xXv2q7voe6MUujsOBh0m2JyuDhLQ.zr6GcCYB.Ue","lastName":"PsSplattie","firstName":"Mattie","__v":0}
