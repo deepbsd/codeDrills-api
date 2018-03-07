@@ -8,7 +8,7 @@
         "password": "password99"
       },
       "userData": {
-        "missedQuestions": [],
+        "missedQuestions": [0],
         "numberOfQuizzes": 20,
         "totalQuestions": 200,
         "totalCorrect": 187,

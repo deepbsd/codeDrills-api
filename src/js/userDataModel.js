@@ -7,12 +7,12 @@ const userSchema = mongoose.Schema({
   username: {type: String, required: true, unique: true},
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  email: {type: String, required: true},
-  password: {type: String, required: true}
+  email: {type: String, required: false},
+  password: {type: String, required: false}
 });
 
 const quizDataSchema = mongoose.Schema({
-  missedQuestions: {type: Array},
+  missedQuestions: {type: Array, required: true},
   numberOfQuizzes: {type: Number, required: true},
   totalQuestions: {type: Number, required: true},
   totalCorrect: {type: Number, required: true},

@@ -26,22 +26,6 @@ router.get('/', (req, res) => {
   });
 });
 
-// To create a new userData entry
-router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ["user", "userData", "lastQuizData"];
-    const keys = Object.keys(req.body["currentUser"]);
-    console.log("*****KEYS: ",keys)
-    for (let i=0; i<requiredFields.length; i++){
-      const field = keys[i];
-    if (!(field in req.body["currentUser"])){
-      const message = `Missing \`${field}\` in request body`;
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  }
-  const item = UserData.create(req.body);
-  res.status(201).json(item);
-})
 
 // This is the skeleton for a new users userData endpoint
 // Not sure if I'm gonna use this yet...
@@ -50,12 +34,10 @@ const userDataSkeleton = {
     "user": {
       "username": "Joe",
       "firstName": "Joe",
-      "lastName": "Blow",
-      "email": "joeblow@whatever.com",
-      "password": "sonorapass"
+      "lastName": "Blow"
     },
     "userData": {
-      "missedQuestions": [],
+      "missedQuestions": [0],
       "numberOfQuizzes": 0,
       "totalQuestions": 0,
       "totalCorrect": 0,
@@ -79,6 +61,31 @@ const userDataSkeleton = {
     }
   }
 }
+
+// To create a new userData entry
+router.post('/', jsonParser, (req, res) => {
+  const requiredFields = ["username", "firstName", "lastName"];
+    const keys = Object.keys(req.body);
+    console.log("*****KEYS: ",keys)
+    for (let i=0; i<requiredFields.length; i++){
+      const field = keys[i];
+    if (!(field in req.body)){
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  const newEntry = userDataSkeleton;
+  userDataSkeleton.currentUser.user = {
+    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
+  }
+  const item = UserData.create(newEntry);
+  console.log("SUCCESS!  You have created an entry!", item);
+  res.status(201).json(item);
+})
+
 
 // This is a delete endpoint for deleting userData's
 router.delete('/:id', (req, res) => {
