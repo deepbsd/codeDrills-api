@@ -149,7 +149,22 @@ router.get('/:username', (req,res) => {
     .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
 });
 
+// *** DELETE a user ***
+router.delete('/:id', (req, res) => {
 
+  User
+    .findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      console.log("It's deleted!")
+      res.status(204).json({ message: "Success! User Removed."});
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: "User Delete Failed! Big problem here..."});
+    });
+
+});
 
 
 // Never expose all your users like below in a prod application
