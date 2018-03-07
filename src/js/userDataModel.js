@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
 });
 
 const quizDataSchema = mongoose.Schema({
-  missedQuestions: {type: Array, required: true},
+  missedQuestions: {type: Array},
   numberOfQuizzes: {type: Number, required: true},
   totalQuestions: {type: Number, required: true},
   totalCorrect: {type: Number, required: true},

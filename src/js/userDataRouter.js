@@ -26,8 +26,25 @@ router.get('/', (req, res) => {
   });
 });
 
+// To create a new userData entry
+router.post('/', jsonParser, (req, res) => {
+  const requiredFields = ["user", "userData", "lastQuizData"];
+    const keys = Object.keys(req.body["currentUser"]);
+    console.log("*****KEYS: ",keys)
+    for (let i=0; i<requiredFields.length; i++){
+      const field = keys[i];
+    if (!(field in req.body["currentUser"])){
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  const item = UserData.create(req.body);
+  res.status(201).json(item);
+})
 
 // This is the skeleton for a new users userData endpoint
+// Not sure if I'm gonna use this yet...
 const userDataSkeleton = {
   "currentUser": {
     "user": {
@@ -62,6 +79,23 @@ const userDataSkeleton = {
     }
   }
 }
+
+// This is a delete endpoint for deleting userData's
+router.delete('/:id', (req, res) => {
+  UserData
+    .findByIdAndRemove(req.params.id)
+    .exec()
+    .then(() => {
+      console.log("It's deleted!")
+      res.status(204).json({ message: "Success! UserData Removed."});
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: "Delete Failed! Big problem here..."});
+    });
+});
+
+
 
 // This join endpoint isn't working yet, but I'm trying to spitball
 //  a function to create a new userData structure for when a user

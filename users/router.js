@@ -146,7 +146,7 @@ router.get('/:username', (req,res) => {
       console.log("***API: ",data)
       res.json(data)
     })
-    .catch( err => res.status(500).json( {message: 'fuck me to tears!'}));
+    .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
 });
 
 
