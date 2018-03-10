@@ -9,6 +9,7 @@ router.use(jsonParser);
 const {UserData} = require('./userDataModel');
 const {User} = require('../../users/models');
 
+// GET all UserData
 router.get('/', (req, res) => {
   return UserData
   .find()
@@ -26,6 +27,23 @@ router.get('/', (req, res) => {
   });
 });
 
+// GET userData file for specific userId
+router.get('/:id', (req, res) => {
+  return UserData
+  .findById(req.params.id)
+  .exec()
+  .then(userdata => {
+    console.log("API  --userData: ", userdata);
+    res.json({
+      userdata: userdata
+    })
+  })
+  .catch(err => {
+    console.log('MESSAGE: ', err.message);
+    console.error('DETAILS: ',err);
+    res.status(500).json({error: 'something went terribly wrong'});
+  });
+});
 
 // This is the skeleton for a new users userData endpoint
 // Not sure if I'm gonna use this yet...
@@ -84,7 +102,25 @@ router.post('/', jsonParser, (req, res) => {
   const item = UserData.create(newEntry);
   console.log("SUCCESS!  You have created an entry!", item);
   res.status(201).json(item);
-})
+});
+
+
+// Update a user's userData file in the database
+// router.put('/', jsonParser, (req, res) => {
+//   const requiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
+//     const quizData = Object.keys(req.body);
+//     console.log("***** QuizData KEYS: ",keys)
+//     for (let i=0; i<requiredFields.length; i++){
+//       const field = keys[i];
+//     if (!(field in req.body)){
+//       const message = `Missing \`${field}\` in request body`;
+//       console.error(message);
+//       return res.status(400).send(message);
+//     }
+//   }
+//
+//   const updatedUserData =
+// })
 
 
 // This is a delete endpoint for deleting userData's
