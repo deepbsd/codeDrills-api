@@ -51,8 +51,7 @@ const userDataSchema = mongoose.Schema({
   currentUser: {
     user: userSchema,
     userData: quizDataSchema,
-    lastQuizData: lastQuizDataSchema,
-    chartData: chartDataSchema
+    lastQuizData: lastQuizDataSchema
   }
 });
 
@@ -71,8 +70,7 @@ userDataSchema.methods.apiRepr = function() {
       username: this.username || '',
       user: this.currentUser.user,
       userData: this.currentUser.userData,
-      lastQuizData: this.currentUser.lastQuizData,
-      chartData: this.currentUser.chartData
+      lastQuizData: this.currentUser.lastQuizData
     }
   }
 }
