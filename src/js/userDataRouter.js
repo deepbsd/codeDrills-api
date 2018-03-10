@@ -106,21 +106,24 @@ router.post('/', jsonParser, (req, res) => {
 
 
 // Update a user's userData file in the database
-// router.put('/', jsonParser, (req, res) => {
-//   const requiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
-//     const quizData = Object.keys(req.body);
-//     console.log("***** QuizData KEYS: ",keys)
-//     for (let i=0; i<requiredFields.length; i++){
-//       const field = keys[i];
-//     if (!(field in req.body)){
-//       const message = `Missing \`${field}\` in request body`;
-//       console.error(message);
-//       return res.status(400).send(message);
-//     }
-//   }
-//
-//   const updatedUserData =
-// })
+router.put('/:id', jsonParser, (req, res) => {
+  const userLastQuizData = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
+  const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
+    const quizDataKeys = Object.keys(req.body);
+    console.log("***** QuizData KEYS: ",req.body);
+    for (let i=0; i<requiredFields.length; i++){
+      const field = keys[i];
+    if (!(field in req.body)){
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  if (res.ok) {
+    console.log("**** PUT Working!", req.body);
+  }
+  const updatedUserData = "to be determined";
+})
 
 
 // This is a delete endpoint for deleting userData's
