@@ -107,8 +107,16 @@ router.post('/', jsonParser, (req, res) => {
 
 // Update a user's userData file in the database
 router.put('/:id', jsonParser, (req, res) => {
-  const userLastQuizData = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
-  const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
+
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    });
+  }
+
+    const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
+    const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
+
     const quizDataKeys = Object.keys(req.body);
     console.log("***** QuizData KEYS: ",req.body);
     for (let i=0; i<requiredFields.length; i++){
@@ -123,7 +131,7 @@ router.put('/:id', jsonParser, (req, res) => {
     console.log("**** PUT Working!", req.body);
   }
   const updatedUserData = "to be determined";
-})
+});
 
 
 // This is a delete endpoint for deleting userData's
