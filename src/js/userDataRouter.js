@@ -107,30 +107,96 @@ router.post('/', jsonParser, (req, res) => {
 
 // Update a user's userData file in the database
 router.put('/:id', jsonParser, (req, res) => {
-
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+  // user ids must match  user id must be same for params and db record
+  if (!(req.params.id && req.body._id && req.params.id === req.body._id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
 
-    const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
-    const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
+  // The new object that we'll construct from the req.body
+  let updated = {};
 
-    const quizDataKeys = Object.keys(req.body);
-    console.log("***** QuizData KEYS: ",req.body);
-    for (let i=0; i<requiredFields.length; i++){
-      const field = keys[i];
-    if (!(field in req.body)){
-      const message = `Missing \`${field}\` in request body`;
+  // these are the required keys for each object we're receiving
+  const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
+  const requiredUserObjects = ["username", "firstName", "lastName"];
+  const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
+  const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
+
+  // req.body must contain the three main userData components
+  requiredUserDataObjects.forEach(name => {
+    if (!(Object.keys(req.body.currentUser).includes(name))){
+      const message = `Missing ${name} in request body`;
       console.error(message);
       return res.status(400).send(message);
     }
+  })
+
+  // req.body.user must contain the correct keys
+  requiredUserObjects.forEach(name => {
+    if (!(Object.keys(req.body.currentUser.user))) {
+      const message = `Missing ${name} in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  })
+
+  // req.body.userData must contain the correct keys
+  userDataRequiredFields.forEach(name => {
+    if (!(Object.keys(req.body.currentUser.userData))) {
+      const message = `Missing ${name} in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  })
+
+  // req.body.lastQuizData must contain the correct keys
+  userLastQuizDataRequiredFields.forEach(name => {
+    if (!(Object.keys(req.body.currentUser.lastQuizData))) {
+      const message = `Missing ${name} in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  })
+
+  // Looks like all the pieces are present, so let's assemble the new object
+  updated = {
+    "_id": req.body._id,
+    "currentUser": {
+      "user": req.body.currentUser.user,
+      "userData": {
+        "numberOfQuizzes": req.body.currentUser.userData.numberOfQuizzes,
+        "totalQuestions": req.body.currentUser.userData.totalQuestions,
+        "totalCorrect": req.body.currentUser.userData.totalCorrect,
+        "jsQuestionsAnswered": req.body.currentUser.userData.jsQuestionsAnswered,
+        "jsQuestionsCorrect": req.body.currentUser.userData.jsQuestionsCorrect,
+        "cssQuestionsAnswered": req.body.currentUser.userData.cssQuestionsAnswered,
+        "cssQuestionsCorrect": req.body.currentUser.userData.cssQuestionsCorrect,
+        "htmlQuestionsAnswered": req.body.currentUser.userData.htmlQuestionsAnswered,
+        "htmlQuestionsCorrect": req.body.currentUser.userData.htmlQuestionsCorrect,
+        "nodeQuestionsAnswered": req.body.currentUser.userData.nodeQuestionsAnswered,
+        "nodeQuestionsCorrect": req.body.currentUser.userData.nodeQuestionsCorrect,
+        "apiQuestionsAnswered": req.body.currentUser.userData.apiQuestionsAnswered,
+        "apiQuestionsCorrect": req.body.currentUser.userData.apiQuestionsCorrect,
+        "mongoQuestionsAnswered": req.body.currentUser.userData.mongoQuestionsAnswered,
+        "mongoQuestionsCorrect": req.body.currentUser.userData.mongoQuestionsCorrect,
+        "missedQuestions": req.body.currentUser.userData.missedQuestions
+      },
+      "lastQuizData": {
+        "totalQuestions": req.body.currentUser.lastQuizData.totalQuestions,
+        "dateOfQuiz": req.body.currentUser.lastQuizData.dateOfQuiz,
+        "totalCorrect": req.body.currentUser.lastQuizData.totalCorrect
+      }
+    }
   }
-  if (res.ok) {
-    console.log("**** PUT Working!", req.body);
-  }
-  const updatedUserData = "to be determined";
+
+
+  // Now lets submit the new object to the database
+  UserData
+    .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+    .exec()
+    .then(updatedData => res.status(201).json(updatedData.apiRepr()))
+    .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
 });
 
 
