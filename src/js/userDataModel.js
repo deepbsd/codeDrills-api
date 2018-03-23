@@ -68,7 +68,7 @@ userDataSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     currentUser: {
-      username: this.username || '',
+      username: this.username,
       user: this.currentUser.user,
       userData: this.currentUser.userData,
       lastQuizData: this.currentUser.lastQuizData,
