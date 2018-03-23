@@ -107,41 +107,41 @@ router.post('/', jsonParser, (req, res) => {
 
 // Update a user's userData file in the database
 router.put('/:id', jsonParser, (req, res) => {
-  // user ids must match  user id must be same for params and db record
+  // ## user ids must match  user id must be same for params and db record
   if (!(req.params.id && req.body._id && req.params.id === req.body._id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
 
-  // The new object that we'll construct from the req.body
+  // ## The new object that we'll construct from the req.body
   let updated = {};
 
-  // these are the required keys for each object we're receiving
-  const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
-  const requiredUserObjects = ["username", "firstName", "lastName"];
+  // ## these are the required keys for each object we're receiving
+  // const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
+  // const requiredUserObjects = ["username", "firstName", "lastName"];
   const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
-  const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
+  // const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
 
-  // req.body must contain the three main userData components
-  requiredUserDataObjects.forEach(name => {
-    if (!(Object.keys(req.body.currentUser).includes(name))){
-      const message = `Missing ${name} in request body`;
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  })
+  // ## req.body must contain the three main userData components
+  // requiredUserDataObjects.forEach(name => {
+  //   if (!(Object.keys(req.body.currentUser).includes(name))){
+  //     const message = `Missing ${name} in request body`;
+  //     console.error(message);
+  //     return res.status(400).send(message);
+  //   }
+  // })
 
-  // req.body.user must contain the correct keys
-  requiredUserObjects.forEach(name => {
-    if (!(Object.keys(req.body.currentUser.user))) {
-      const message = `Missing ${name} in request body`;
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  })
+  // ## req.body.user must contain the correct keys
+  // requiredUserObjects.forEach(name => {
+  //   if (!(Object.keys(req.body.currentUser.user))) {
+  //     const message = `Missing ${name} in request body`;
+  //     console.error(message);
+  //     return res.status(400).send(message);
+  //   }
+  // })
 
-  // req.body.userData must contain the correct keys
+  // ## req.body.userData must contain the correct keys
   userDataRequiredFields.forEach(name => {
     if (!(Object.keys(req.body.currentUser.userData))) {
       const message = `Missing ${name} in request body`;
@@ -150,7 +150,7 @@ router.put('/:id', jsonParser, (req, res) => {
     }
   })
 
-  // req.body.lastQuizData must contain the correct keys
+  // ## req.body.lastQuizData must contain the correct keys
   userLastQuizDataRequiredFields.forEach(name => {
     if (!(Object.keys(req.body.currentUser.lastQuizData))) {
       const message = `Missing ${name} in request body`;
@@ -163,7 +163,6 @@ router.put('/:id', jsonParser, (req, res) => {
   updated = {
     "_id": req.body._id,
     "currentUser": {
-      "user": req.body.currentUser.user,
       "userData": {
         "numberOfQuizzes": req.body.currentUser.userData.numberOfQuizzes,
         "totalQuestions": req.body.currentUser.userData.totalQuestions,
