@@ -80,6 +80,7 @@ const userDataSkeleton = {
   }
 }
 
+
 // To create a new userData entry
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ["username", "firstName", "lastName"];
@@ -104,55 +105,6 @@ router.post('/', jsonParser, (req, res) => {
   res.status(201).json(item);
 });
 
-// Update a user's userData file in the database
-router.patch('/:id', jsonParser, (req, res) => {
-  // ## user ids must match  user id must be same for params and db record
-  if (!(req.params.id && req.body._id && req.params.id === req.body._id)) {
-    res.status(400).json({
-      error: 'Request path id and request body id values must match'
-    });
-  }
-
-  console.log("### Hey: ", req.body);
-
-  // ## The new object that we'll construct from the req.body
-  let updated = {};
-
-  // ## these are the required keys for each object we're receiving
-  const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
-  const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
-
-
-  // ## req.body.userData must contain the correct keys
-  userDataRequiredFields.forEach(name => {
-    if (!(Object.keys(req.body.currentUser.userData))) {
-      const message = `Missing ${name} in request body`;
-      console.error(message);
-      return res.status(400).send(message);
-    }
-  })
-
-  // ## req.body.lastQuizData must contain the correct keys
-  // userLastQuizDataRequiredFields.forEach(name => {
-  //   if (!(Object.keys(req.body.currentUser.lastQuizData))) {
-  //     const message = `Missing ${name} in request body`;
-  //     console.error(message);
-  //     return res.status(400).send(message);
-  //   }
-  // })
-
-  // Looks like all the pieces are present, so let's assemble the new object
-  updated = req.body;
-
-
-  // Now lets submit the new object to the database
-  UserData
-    .findByIdAndUpdate(req.params.id, {$set: updated}, {upsert: false, new: true})
-    .exec()
-    .then(updatedData => res.status(201).json(updatedData.apiRepr()))
-    .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
-});
-
 
 // Update a user's userData file in the database
 router.put('/:id', jsonParser, (req, res) => {
@@ -164,7 +116,7 @@ router.put('/:id', jsonParser, (req, res) => {
   }
 
   // ## The new object that we'll construct from the req.body
-  let updated = {};
+  // let updated = {};
 
   // ## these are the required keys for each object we're receiving
   // const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
@@ -208,11 +160,34 @@ router.put('/:id', jsonParser, (req, res) => {
     }
   })
 
+
+
+  // function getUserInfo(id){
+  //   User.findById(id).exec(function(err, user){
+  //     info.username = user.username,
+  //     info.firstName = user.firstName
+  //   });
+  //   console.log('user: ',info );
+  //
+  // }
+
+  // Get the userdata
+  // const userDataUserQuery = getUserInfo(req.params.id);
+  // userDataUserQuery.exec(function(err, user){
+  //   if (err) { return console.log(err)}
+  //   return user
+  // })
+
+  // Modify the user info so that it doesn't have password hashes
+  // and other needless stuff for this object
+  // const updatedUserInfo = {
+  //   "username": userDataUserQuery.username,
+  //   "firstName": userDataUserQuery.firstName,
+  //   "lastName": userDataUserQuery.lastName
+  // }
+
   // Looks like all the pieces are present, so let's assemble the new object
-  updated = {
-    "_id": req.body._id,
-    "currentUser": {
-      "userData": {
+  const updatedUserData = {
         "numberOfQuizzes": req.body.currentUser.userData.numberOfQuizzes,
         "totalQuestions": req.body.currentUser.userData.totalQuestions,
         "totalCorrect": req.body.currentUser.userData.totalCorrect,
@@ -229,22 +204,56 @@ router.put('/:id', jsonParser, (req, res) => {
         "mongoQuestionsAnswered": req.body.currentUser.userData.mongoQuestionsAnswered,
         "mongoQuestionsCorrect": req.body.currentUser.userData.mongoQuestionsCorrect,
         "missedQuestions": req.body.currentUser.userData.missedQuestions
-      },
-      "lastQuizData": {
+    };
+
+  const updatedLastQuizData = {
         "totalQuestions": req.body.currentUser.lastQuizData.totalQuestions,
         "dateOfQuiz": req.body.currentUser.lastQuizData.dateOfQuiz,
         "totalCorrect": req.body.currentUser.lastQuizData.totalCorrect
       }
+
+  let info = {};
+
+  // *** User.id is NOT the same as UserData.id!!!!!
+  //  Where is User.id coming from?
+  let bogusUserid = "5ab8fcb7a77cf16fe9fdc445"
+
+  // Function to get the user data
+  User.findById(bogusUserid).then( user => {
+    const newCurrentUser = {
+      currentUser: {
+        "user": {
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName
+        },
+        "userData": updatedUserData,
+        "lastQuizData": updatedLastQuizData,
+      }
     }
-  }
+    console.log("***USER ",user);
+    return UserData
+      .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
+  })
+  .then(updatedData => {
+    console.log("** updatedData ", updatedData)
+    res.status(201).json(updatedData)
+  })
+  .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
+
+
+
+  //
+  // //Log this stuff out...
+  // console.log("***newCurrentUser ", userDataUserQuery);
 
 
   // Now lets submit the new object to the database
-  UserData
-    .findByIdAndUpdate(req.params.id, {$set: updated}, {upsert: true, new: true})
-    .exec()
-    .then(updatedData => res.status(201).json(updatedData.apiRepr()))
-    .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
+//   UserData
+//     .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {upsert: true, new: true})
+//     .exec()
+//     .then(updatedData => res.status(201).json(updatedData))
+//     .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
 });
 
 

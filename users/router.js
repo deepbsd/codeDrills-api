@@ -138,6 +138,9 @@ router.post('/', jsonParser, (req, res) => {
 
 
 // *** EXPERIMENTAL ENDPOINT ****
+// Used when creating a new user and creating new userData
+// Right now there is no endpoint that returns only user info
+// for /:username
 router.get('/:username', (req,res) => {
   const username = req.params.username;
 
@@ -148,6 +151,19 @@ router.get('/:username', (req,res) => {
     })
     .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
 });
+
+// GET a user by id
+// router.get('/:id', (req,res) => {
+//
+//   return User
+//     .findById(req.params.id)
+//     .exec()
+//     .then( data => {
+//       console.log("***API: ",data)
+//       res.json(data)
+//     })
+//     .catch( err => res.status(500).json( {message: 'No such user!'}));
+// });
 
 // *** DELETE a user ***
 router.delete('/:id', (req, res) => {
