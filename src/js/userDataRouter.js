@@ -119,28 +119,28 @@ router.put('/:id', jsonParser, (req, res) => {
   // let updated = {};
 
   // ## these are the required keys for each object we're receiving
-  // const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
-  // const requiredUserObjects = ["username", "firstName", "lastName"];
+  const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
+  const requiredUserObjects = ["username", "firstName", "lastName"];
   const userDataRequiredFields = ["missedQuestions", "numberOfQuizzes", "totalQuestions", "totalCorrect", "jsQuestionsAnswered", "jsQuestionsCorrect", "cssQuestionsAnswered", "cssQuestionsCorrect", "htmlQuestionsAnswered", "htmlQuestionsCorrect", "nodeQuestionsAnswered", "nodeQuestionsCorrect", "apiQuestionsAnswered", "apiQuestionsCorrect", "mongoQuestionsAnswered", "mongoQuestionsCorrect"];
   const userLastQuizDataRequiredFields = ["totalQuestions", "dateOfQuiz", "totalCorrect"];
 
   // ## req.body must contain the three main userData components
-  // requiredUserDataObjects.forEach(name => {
-  //   if (!(Object.keys(req.body.currentUser).includes(name))){
-  //     const message = `Missing ${name} in request body`;
-  //     console.error(message);
-  //     return res.status(400).send(message);
-  //   }
-  // })
+  requiredUserDataObjects.forEach(name => {
+    if (!(Object.keys(req.body.currentUser).includes(name))){
+      const message = `Missing ${name} in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  })
 
   // ## req.body.user must contain the correct keys
-  // requiredUserObjects.forEach(name => {
-  //   if (!(Object.keys(req.body.currentUser.user))) {
-  //     const message = `Missing ${name} in request body`;
-  //     console.error(message);
-  //     return res.status(400).send(message);
-  //   }
-  // })
+  requiredUserObjects.forEach(name => {
+    if (!(Object.keys(req.body.currentUser.user))) {
+      const message = `Missing ${name} in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  })
 
   // ## req.body.userData must contain the correct keys
   userDataRequiredFields.forEach(name => {
@@ -161,7 +161,7 @@ router.put('/:id', jsonParser, (req, res) => {
   })
 
 
-
+  //
   // function getUserInfo(id){
   //   User.findById(id).exec(function(err, user){
   //     info.username = user.username,
@@ -170,7 +170,7 @@ router.put('/:id', jsonParser, (req, res) => {
   //   console.log('user: ',info );
   //
   // }
-
+  //
   // Get the userdata
   // const userDataUserQuery = getUserInfo(req.params.id);
   // userDataUserQuery.exec(function(err, user){
@@ -214,12 +214,9 @@ router.put('/:id', jsonParser, (req, res) => {
 
   let info = {};
 
-  // *** User.id is NOT the same as UserData.id!!!!!
-  //  Where is User.id coming from?
-  let bogusUserid = "5ab8fcb7a77cf16fe9fdc445"
 
   // Function to get the user data
-  User.findById(bogusUserid).then( user => {
+  User.findOne({"username":req.body.currentUser.user.username}).then( user => {
     const newCurrentUser = {
       currentUser: {
         "user": {
