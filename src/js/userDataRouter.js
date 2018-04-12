@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
   .then(userdata => {
     console.log("API  --userData: ", userdata);
     res.json({
-      userdata: userdata
+      userdata: userdata.apiRepr()
     })
   })
   .catch(err => {
@@ -126,7 +126,8 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // ## req.body must contain the three main userData components
   requiredUserDataObjects.forEach(name => {
-    if (!(Object.keys(req.body.currentUser).includes(name))){
+    console.log("### Suspect Obj: ", req.body);
+    if (!(Object.keys(req.body).includes(name))){
       const message = `Missing ${name} in request body`;
       console.error(message);
       return res.status(400).send(message);
@@ -135,7 +136,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // ## req.body.user must contain the correct keys
   requiredUserObjects.forEach(name => {
-    if (!(Object.keys(req.body.currentUser.user))) {
+    if (!(Object.keys(req.body.user))) {
       const message = `Missing ${name} in request body`;
       console.error(message);
       return res.status(400).send(message);
@@ -144,7 +145,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // ## req.body.userData must contain the correct keys
   userDataRequiredFields.forEach(name => {
-    if (!(Object.keys(req.body.currentUser.userData))) {
+    if (!(Object.keys(req.body.userData))) {
       const message = `Missing ${name} in request body`;
       console.error(message);
       return res.status(400).send(message);
@@ -153,7 +154,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // ## req.body.lastQuizData must contain the correct keys
   userLastQuizDataRequiredFields.forEach(name => {
-    if (!(Object.keys(req.body.currentUser.lastQuizData))) {
+    if (!(Object.keys(req.body.lastQuizData))) {
       const message = `Missing ${name} in request body`;
       console.error(message);
       return res.status(400).send(message);
@@ -188,35 +189,35 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // Looks like all the pieces are present, so let's assemble the new object
   const updatedUserData = {
-        "numberOfQuizzes": req.body.currentUser.userData.numberOfQuizzes,
-        "totalQuestions": req.body.currentUser.userData.totalQuestions,
-        "totalCorrect": req.body.currentUser.userData.totalCorrect,
-        "jsQuestionsAnswered": req.body.currentUser.userData.jsQuestionsAnswered,
-        "jsQuestionsCorrect": req.body.currentUser.userData.jsQuestionsCorrect,
-        "cssQuestionsAnswered": req.body.currentUser.userData.cssQuestionsAnswered,
-        "cssQuestionsCorrect": req.body.currentUser.userData.cssQuestionsCorrect,
-        "htmlQuestionsAnswered": req.body.currentUser.userData.htmlQuestionsAnswered,
-        "htmlQuestionsCorrect": req.body.currentUser.userData.htmlQuestionsCorrect,
-        "nodeQuestionsAnswered": req.body.currentUser.userData.nodeQuestionsAnswered,
-        "nodeQuestionsCorrect": req.body.currentUser.userData.nodeQuestionsCorrect,
-        "apiQuestionsAnswered": req.body.currentUser.userData.apiQuestionsAnswered,
-        "apiQuestionsCorrect": req.body.currentUser.userData.apiQuestionsCorrect,
-        "mongoQuestionsAnswered": req.body.currentUser.userData.mongoQuestionsAnswered,
-        "mongoQuestionsCorrect": req.body.currentUser.userData.mongoQuestionsCorrect,
-        "missedQuestions": req.body.currentUser.userData.missedQuestions
+        "numberOfQuizzes": req.body.userData.numberOfQuizzes,
+        "totalQuestions": req.body.userData.totalQuestions,
+        "totalCorrect": req.body.userData.totalCorrect,
+        "jsQuestionsAnswered": req.body.userData.jsQuestionsAnswered,
+        "jsQuestionsCorrect": req.body.userData.jsQuestionsCorrect,
+        "cssQuestionsAnswered": req.body.userData.cssQuestionsAnswered,
+        "cssQuestionsCorrect": req.body.userData.cssQuestionsCorrect,
+        "htmlQuestionsAnswered": req.body.userData.htmlQuestionsAnswered,
+        "htmlQuestionsCorrect": req.body.userData.htmlQuestionsCorrect,
+        "nodeQuestionsAnswered": req.body.userData.nodeQuestionsAnswered,
+        "nodeQuestionsCorrect": req.body.userData.nodeQuestionsCorrect,
+        "apiQuestionsAnswered": req.body.userData.apiQuestionsAnswered,
+        "apiQuestionsCorrect": req.body.userData.apiQuestionsCorrect,
+        "mongoQuestionsAnswered": req.body.userData.mongoQuestionsAnswered,
+        "mongoQuestionsCorrect": req.body.userData.mongoQuestionsCorrect,
+        "missedQuestions": req.body.userData.missedQuestions
     };
 
   const updatedLastQuizData = {
-        "totalQuestions": req.body.currentUser.lastQuizData.totalQuestions,
-        "dateOfQuiz": req.body.currentUser.lastQuizData.dateOfQuiz,
-        "totalCorrect": req.body.currentUser.lastQuizData.totalCorrect
+        "totalQuestions": req.body.lastQuizData.totalQuestions,
+        "dateOfQuiz": req.body.lastQuizData.dateOfQuiz,
+        "totalCorrect": req.body.lastQuizData.totalCorrect
       }
 
   let info = {};
 
 
   // Function to get the user data
-  User.findOne({"username":req.body.currentUser.user.username}).then( user => {
+  User.findOne({"username":req.body.user.username}).then( user => {
     const newCurrentUser = {
       currentUser: {
         "user": {
@@ -232,10 +233,10 @@ router.put('/:id', jsonParser, (req, res) => {
     return UserData
       .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
   })
-  .then(updatedData => {
-    console.log("** updatedData ", updatedData)
-    res.status(201).json(updatedData)
-  })
+  // .then(updatedData => {
+  //   console.log("** updatedData ", updatedData)
+  //   res.status(201).json(updatedData)
+  // })
   .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
 
 
