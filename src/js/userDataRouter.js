@@ -109,7 +109,7 @@ router.post('/', jsonParser, (req, res) => {
 // Update a user's userData file in the database
 router.put('/:id', jsonParser, (req, res) => {
   // ## user ids must match  user id must be same for params and db record
-  if (!(req.params.id && req.body._id && req.params.id === req.body._id)) {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
