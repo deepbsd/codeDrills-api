@@ -114,9 +114,7 @@ router.put('/:id', jsonParser, (req, res) => {
       error: 'Request path id and request body id values must match'
     });
   }
-
-  // ## The new object that we'll construct from the req.body
-  // let updated = {};
+  console.log("***API: hitting PUT method with userData.id: ", req.params.id);
 
   // ## these are the required keys for each object we're receiving
   const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
