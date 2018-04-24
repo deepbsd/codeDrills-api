@@ -17,7 +17,7 @@ describe('User API', function() {
     return closeServer();
   });
 
-  it('should get 200 on GET requests', function() {
+  it('should get 200 on GET requests and return correct objects and keys', function() {
     return chai.request(app)
       .get('/api/users/')
       .then(function(res) {
@@ -36,25 +36,22 @@ describe('User API', function() {
 });
 
 
-// it('should get 200 on GET requests', function() {
-//   return chai.request(app)
-//     .get('/api/users/')
-//     .then(function(res) {
-//       expect(res).to.have.status(200);
-//       expect(res).to.be.json;
-//       expect(res.body).to.be.a('object');
-//       expect(res.body).to.have.all.keys('userdata');
-//       expect(res.body.userdata).to.be.a('array');
-//       expect(res.body.userdata.length).to.be.above(0);
-//       res.body.userdata.forEach(function(item){
-//         expect(item).to.be.a('object');
-//         expect(item).to.contain.all.keys(
-//           '_id', 'currentUser'
-//         )
-//         expect(item.currentUser).to.contain.all.keys(
-//           'user', 'userData', 'lastQuizData'
-//         )
-//       });
-//     });
-// });
-// });
+it('should add an item on POST', function() {
+  const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
+  return chai.request(app)
+    .post('/api/users/')
+    .send(JSON.stringify(newItem))
+    .then(function(res) {
+      expect(res).to.have.status(201);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('object');
+      expect(res.body).to.include.keys('username', 'password', 'firstName', 'lastName');
+      expect(res.body.id).to.not.equal(null);
+      // response should be deep equal to `newItem` from above if we assign
+      // `id` to it from `res.body.id`
+      expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
+    })
+    .catch(err => {
+      console.log("There was an error!", err)
+    })
+});

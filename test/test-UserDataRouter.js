@@ -17,7 +17,7 @@ describe('Userdata API', function() {
     return closeServer();
   });
 
-  it('should get 200 on GET requests', function() {
+  it('should get 200 on GET requests and return correct objects and keys', function() {
     return chai.request(app)
       .get('/api/userdata/')
       .then(function(res) {
