@@ -33,47 +33,49 @@ describe('User API', function() {
         })
       });
   });
+
+
+
+  it('should add an item on POST', function() {
+    const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
+    return chai.request(app)
+      .post('/api/users/')
+      .send(JSON.stringify(newItem))
+      .then(function(res) {
+        expect(res).to.have.status(201);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.include.keys('username', 'password', 'firstName', 'lastName');
+        expect(res.body.id).to.not.equal(null);
+        // response should be deep equal to `newItem` from above if we assign
+        // `id` to it from `res.body.id`
+        expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
+      })
+      .catch(err => {
+        console.log("There was an error!", err)
+      })
+  });
+
+
+  it('should delete an item on DELETE', function() {
+    const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
+    return chai.request(app)
+      .post('/api/users/')
+      .send(JSON.stringify(newItem))
+      .then(function(res) {
+        const newUser = res.body;
+        expect(newUser.id).to.not.equal(null);
+      })
+      .then(function(res){
+        return chai.request(app)
+        .delete(`/api/users/${newUser.id}`)
+      })
+      .then(function(res){
+        expect(res).to.have.status(204);
+      })
+      .catch( err => {
+        console.log("Error with DELETE test!", err)
+      })
+  })
+
 });
-
-
-it('should add an item on POST', function() {
-  const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
-  return chai.request(app)
-    .post('/api/users/')
-    .send(JSON.stringify(newItem))
-    .then(function(res) {
-      expect(res).to.have.status(201);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('object');
-      expect(res.body).to.include.keys('username', 'password', 'firstName', 'lastName');
-      expect(res.body.id).to.not.equal(null);
-      // response should be deep equal to `newItem` from above if we assign
-      // `id` to it from `res.body.id`
-      expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
-    })
-    .catch(err => {
-      console.log("There was an error!", err)
-    })
-});
-
-
-it('should delete an item on DELETE', function() {
-  const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
-  return chai.request(app)
-    .post('/api/users/')
-    .send(JSON.stringify(newItem))
-    .then(function(res) {
-      const newUser = res.body;
-      expect(newUser.id).to.not.equal(null);
-    })
-    .then(function(res){
-      return chai.request(app)
-      .delete(`/api/users/${newUser.id}`)
-    })
-    .then(function(res){
-      expect(res).to.have.status(204);
-    })
-    .catch( err => {
-      console.log("Error with DELETE test!", err)
-    })
-})
