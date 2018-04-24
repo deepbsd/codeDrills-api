@@ -55,3 +55,25 @@ it('should add an item on POST', function() {
       console.log("There was an error!", err)
     })
 });
+
+
+it('should delete an item on DELETE', function() {
+  const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
+  return chai.request(app)
+    .post('/api/users/')
+    .send(JSON.stringify(newItem))
+    .then(function(res) {
+      const newUser = res.body;
+      expect(newUser.id).to.not.equal(null);
+    })
+    .then(function(res){
+      return chai.request(app)
+      .delete(`/api/users/${newUser.id}`)
+    })
+    .then(function(res){
+      expect(res).to.have.status(204);
+    })
+    .catch( err => {
+      console.log("Error with DELETE test!", err)
+    })
+})
