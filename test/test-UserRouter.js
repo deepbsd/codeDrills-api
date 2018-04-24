@@ -37,7 +37,7 @@ describe('User API', function() {
 
 
   it('should add an item on POST', function() {
-    const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
+    const newItem = {username: "joe4", password: "password99", firstName: "joseph", lastName: "blow"};
     return chai.request(app)
       .post('/api/users/')
       .send(JSON.stringify(newItem))
@@ -52,13 +52,13 @@ describe('User API', function() {
         expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
       })
       .catch(err => {
-        console.log("There was an error!", err)
+        console.log("There was a POST error!", err)
       })
   });
 
 
   it('should delete an item on DELETE', function() {
-    const newItem = {username: "joe3", password: "password99", firstName: "joseph", lastName: "blow"};
+    const newItem = {username: "joe4", password: "password99", firstName: "joseph", lastName: "blow"};
     return chai.request(app)
       .post('/api/users/')
       .send(JSON.stringify(newItem))

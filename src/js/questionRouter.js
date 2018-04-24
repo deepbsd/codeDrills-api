@@ -14,7 +14,7 @@ router.get('/', (req,res) => {
   .find()
   .exec()
   .then(questions => {
-    console.log('Yo! Dude!',questions);
+    // console.log('Yo! Dude!',questions);
     res.json({
       questions: questions.map(question => question.apiRepr())
     });

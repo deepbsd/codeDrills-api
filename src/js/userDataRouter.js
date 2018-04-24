@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
   .find()
   .exec()
   .then(userdata => {
-    console.log("API  --userData: ", userdata);
+    // console.log("API  --userData: ", userdata);
     res.json({
       userdata: userdata
     })
