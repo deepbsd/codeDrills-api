@@ -34,6 +34,9 @@ describe('Userdata API', function() {
           expect(item).to.contain.all.keys(
             '_id', 'currentUser'
           )
+          expect(item.currentUser).to.contain.all.keys(
+            'user', 'userData', 'lastQuizData'
+          )
         });
       });
   });
