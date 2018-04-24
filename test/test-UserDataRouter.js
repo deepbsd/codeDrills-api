@@ -28,13 +28,13 @@ describe('Userdata API', function() {
         expect(res.body).to.be.a('object');
         expect(res.body).to.have.all.keys('userdata');
         expect(res.body.userdata).to.be.a('array');
-        // expect(res.body.userdata.length).to.be.above(0);
-        // res.body.userdata.forEach(function(item){
-        //   expect(item).to.be.a('object');
-          // expect(item).to.have.all.keys(
-          //   '_id', 'currentUser'
-          // )
-        // })
+        expect(res.body.userdata.length).to.be.above(0);
+        res.body.userdata.forEach(function(item){
+          expect(item).to.be.a('object');
+          expect(item).to.contain.all.keys(
+            '_id', 'currentUser'
+          )
+        });
       });
   });
 });
