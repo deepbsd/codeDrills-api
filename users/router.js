@@ -116,6 +116,7 @@ router.post('/', jsonParser, (req, res) => {
       return User.hashPassword(password);
     })
     .then(hash => {
+      console.log("**HASH defined? ", hash);
       return User.create({
         username,
         password: hash,
