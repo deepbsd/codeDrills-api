@@ -89,15 +89,27 @@ app.use('*', (req, res) => {
 // and then assign a value to it in run
 let server;
 
+
+// set options as per http://mongoosejs.com/docs/connections.html#use-mongo-client
+const options = {
+  useMongoClient: true,
+  autoIndex: false, // Don't build indexes
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+};
+
 // this function connects to our database, then starts the server
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.connect(databaseUrl, options, err => {
       if (err) {
         return reject(err);
       }
       server = app.listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
+        // mday commented this out console.log(`Your app is listening on port ${port}`);
         resolve();
       })
       .on('error', err => {
@@ -113,7 +125,7 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
 function closeServer() {
   return mongoose.disconnect().then(() => {
      return new Promise((resolve, reject) => {
-       console.log('Closing server');
+       // mday commented this out console.log('Closing server');
        server.close(err => {
            if (err) {
                return reject(err);

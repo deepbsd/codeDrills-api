@@ -19,7 +19,7 @@ app.use(cookieParser());
 // app.post('/', (req, res) => {
 router.post('/', (req, res) => {
 	let {username, password} = req.body;
-  console.log('USERNAME: ',username);
+  // mday commented this out console.log('USERNAME: ',username);
   return User.find({username})
     .count()
     .then(count => {
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
       return User.hashPassword(password);  //c034
     })
     .then(hash => {
-      console.log('HASH: ', hash);
+      // mday commented this out console.log('HASH: ', hash);
       return User.create({
         username,
         password: hash

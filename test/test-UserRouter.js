@@ -98,7 +98,7 @@ describe('User API', function() {
 
   it('should add an item on POST', function() {
     const newUser = generateUserData();
-    console.log("**Payload: ",newUser)
+    // mday commented this out console.log("**Payload: ",newUser)
     return chai.request(app)
       .post('/api/users/')
       .send(newUser)
@@ -115,25 +115,25 @@ describe('User API', function() {
         expect(res.body.lastName).to.equal(newUser.lastName);
       })
       .catch(err => {
-        console.log("There was a POST error!", err)
+        // mday commented this out console.log("There was a POST error!", err)
       })
   });
 
   const newItem = generateUserData();
 
   it('should delete an item on DELETE', function() {
-    console.log("**Payload: ", newItem);
+    // mday commented this out console.log("**Payload: ", newItem);
     return chai.request(app)
       .post('/api/users/')
       .send(newItem)
       .then(function(res) {
-        console.log("**Res: ", res.body);
+        // mday commented this out console.log("**Res: ", res.body);
         const newUser = res.body;
         expect(newUser.id).to.not.equal(null);
         return User.findById(newUser.id);
       })
       .then(function(newUser){
-        console.log("**newUser: ", newUser);
+        // mday commented this out console.log("**newUser: ", newUser);
         return chai.request(app)
         .delete(`/api/users/${newUser.id}`)
       })
@@ -141,7 +141,7 @@ describe('User API', function() {
         expect(res).to.have.status(204);
       })
       .catch( err => {
-        console.log("Error with DELETE test!", err)
+        // mday commented this out console.log("Error with DELETE test!", err)
       })
   })
 

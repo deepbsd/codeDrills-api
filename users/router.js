@@ -116,7 +116,7 @@ router.post('/', jsonParser, (req, res) => {
       return User.hashPassword(password);
     })
     .then(hash => {
-      console.log("**HASH defined? ", hash);
+      // mday commented this out console.log("**HASH defined? ", hash);
       return User.create({
         username,
         password: hash,
@@ -147,7 +147,7 @@ router.get('/:username', (req,res) => {
 
   return UserData.findOne({ "currentUser.user.username": username })
     .then( data => {
-      console.log("***API: ",data)
+      // mday commented this out console.log("***API: ",data)
       res.json(data)
     })
     .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
@@ -160,7 +160,7 @@ router.get('/:username', (req,res) => {
 //     .findById(req.params.id)
 //     .exec()
 //     .then( data => {
-//       console.log("***API: ",data)
+//       // mday commented this out console.log("***API: ",data)
 //       res.json(data)
 //     })
 //     .catch( err => res.status(500).json( {message: 'No such user!'}));
@@ -173,7 +173,7 @@ router.delete('/:id', (req, res) => {
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
-      console.log("It's deleted!")
+      // mday commented this out console.log("It's deleted!")
       res.status(204).json({ message: "Success! User Removed."});
     })
     .catch(err => {

@@ -312,7 +312,7 @@
   "category": "node",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "Why does console.log in a node file output to terminal instead of the console in the browser?",
+  "question": "Why does // mday commented this out console.log in a node file output to terminal instead of the console in the browser?",
   "answers": [
     {"answerText": "Because the Node command is not happening inside the browser.", "chosen": false, "correct": true},
     {"answerText": "Because there's a special switch in the browser for this output.", "chosen": false},

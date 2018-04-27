@@ -15,13 +15,13 @@ router.get('/', (req, res) => {
   .find()
   .exec()
   .then(userdata => {
-    // console.log("API  --userData: ", userdata);
+    // // mday commented this out console.log("API  --userData: ", userdata);
     res.json({
       userdata: userdata
     })
   })
   .catch(err => {
-    console.log('MESSAGE: ', err.message);
+    // mday commented this out console.log('MESSAGE: ', err.message);
     console.error('DETAILS: ',err);
     res.status(500).json({error: 'something went terribly wrong'});
   });
@@ -33,13 +33,13 @@ router.get('/:id', (req, res) => {
   .findById(req.params.id)
   .exec()
   .then(userdata => {
-    console.log("API  --userData: ", userdata);
+    // mday commented this out console.log("API  --userData: ", userdata);
     res.json({
       userdata: userdata.apiRepr()
     })
   })
   .catch(err => {
-    console.log('MESSAGE: ', err.message);
+    // mday commented this out console.log('MESSAGE: ', err.message);
     console.error('DETAILS: ',err);
     res.status(500).json({error: 'something went terribly wrong'});
   });
@@ -85,7 +85,7 @@ const userDataSkeleton = {
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ["username", "firstName", "lastName"];
     const keys = Object.keys(req.body);
-    console.log("*****KEYS: ",keys)
+    // mday commented this out console.log("*****KEYS: ",keys)
     for (let i=0; i<requiredFields.length; i++){
       const field = keys[i];
     if (!(field in req.body)){
@@ -101,7 +101,7 @@ router.post('/', jsonParser, (req, res) => {
     lastName: req.body.lastName
   }
   const item = UserData.create(newEntry);
-  console.log("SUCCESS!  You have created an entry!", item);
+  // mday commented this out console.log("SUCCESS!  You have created an entry!", item);
   res.status(201).json(item);
 });
 
@@ -114,7 +114,7 @@ router.put('/:id', jsonParser, (req, res) => {
       error: 'Request path id and request body id values must match'
     });
   }
-  console.log("***API: hitting PUT method with userData.id: ", req.params.id);
+  // mday commented this out console.log("***API: hitting PUT method with userData.id: ", req.params.id);
 
   // ## these are the required keys for each object we're receiving
   const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
@@ -124,7 +124,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // ## req.body must contain the three main userData components
   requiredUserDataObjects.forEach(name => {
-    console.log("### Suspect Obj: ", req.body);
+    // mday commented this out console.log("### Suspect Obj: ", req.body);
     if (!(Object.keys(req.body).includes(name))){
       const message = `Missing ${name} in request body`;
       console.error(message);
@@ -166,14 +166,14 @@ router.put('/:id', jsonParser, (req, res) => {
   //     info.username = user.username,
   //     info.firstName = user.firstName
   //   });
-  //   console.log('user: ',info );
+  //   // mday commented this out console.log('user: ',info );
   //
   // }
   //
   // Get the userdata
   // const userDataUserQuery = getUserInfo(req.params.id);
   // userDataUserQuery.exec(function(err, user){
-  //   if (err) { return console.log(err)}
+  //   if (err) { return // mday commented this out console.log(err)}
   //   return user
   // })
 
@@ -227,12 +227,12 @@ router.put('/:id', jsonParser, (req, res) => {
         "lastQuizData": updatedLastQuizData,
       }
     }
-    console.log("***USER ",user);
+    // mday commented this out console.log("***USER ",user);
     return UserData
       .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
   })
   // .then(updatedData => {
-  //   console.log("** updatedData ", updatedData)
+  //   // mday commented this out console.log("** updatedData ", updatedData)
   //   res.status(201).json(updatedData)
   // })
   .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
@@ -241,7 +241,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   //
   // //Log this stuff out...
-  // console.log("***newCurrentUser ", userDataUserQuery);
+  // // mday commented this out console.log("***newCurrentUser ", userDataUserQuery);
 
 
   // Now lets submit the new object to the database
@@ -259,7 +259,7 @@ router.delete('/:id', (req, res) => {
     .findByIdAndRemove(req.params.id)
     .exec()
     .then(() => {
-      console.log("It's deleted!")
+      // mday commented this out console.log("It's deleted!")
       res.status(204).json({ message: "Success! UserData Removed."});
     })
     .catch(err => {

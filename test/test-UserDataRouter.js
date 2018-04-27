@@ -76,7 +76,7 @@ function seedUserData() {
     seedData.push(generateUserData());
   }
   // this will return a promise
-  console.log("*** seedData: ", seedData);
+  // mday commented this out console.log("*** seedData: ", seedData);
   return UserData.insertMany(seedData);
 }
 
@@ -109,12 +109,12 @@ describe('Userdata API', function() {
         expect(res).to.be.json;
         expect(res.body).to.be.a('object');
         expect(res.body).to.have.all.keys('userdata');
-        console.log("**res.body: ",res.body);
+        // mday commented this out console.log("**res.body: ",res.body);
         expect(res.body.userdata).to.be.a('array');
         expect(res.body.userdata.length).to.be.above(0);
         // res.body.userdata.forEach(function(item){
         //   expect(item).to.be.a('object');
-        //   console.log("**item: ",item);
+        //   // mday commented this out console.log("**item: ",item);
         // //   expect(item.currentUser).to.contain.all.keys(
         // //     'user', 'userData', 'lastQuizData'
         // //   )
