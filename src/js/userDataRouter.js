@@ -85,7 +85,7 @@ const userDataSkeleton = {
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ["username", "firstName", "lastName"];
     const keys = Object.keys(req.body);
-    console.log("*****KEYS: ",keys)
+    console.log("*****REQ.BODY: ",req.body)
     for (let i=0; i<requiredFields.length; i++){
       const field = keys[i];
     if (!(field in req.body)){

@@ -83,6 +83,19 @@ app.use('*', (req, res) => {
 //   res.status(404).json({message: 'Not Found'});
 // });
 
+// From Matthew...
+// set options as per http://mongoosejs.com/docs/connections.html#use-mongo-client
+const options = {
+  useMongoClient: true,
+  autoIndex: false, // Don't build indexes
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+};
+
+
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
@@ -92,7 +105,7 @@ let server;
 // this function connects to our database, then starts the server
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.connect(databaseUrl, options, err => {
       if (err) {
         return reject(err);
       }
