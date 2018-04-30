@@ -206,6 +206,8 @@ router.put('/:id', jsonParser, (req, res) => {
     console.log("***USER ",user);
     return UserData
       .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
+    .then(userdata => res.status(204).end())
+      // .catch(err => res.status(500).json({ message: 'Internal server error' }));
   })
   .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
 });

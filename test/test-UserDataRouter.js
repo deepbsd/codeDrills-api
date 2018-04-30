@@ -177,7 +177,7 @@ describe('Userdata API', function() {
     //  2. Make a PUT request to update that restaurant
     //  3. Prove restaurant returned by request contains data we sent
     //  4. Prove restaurant in db is correctly updated
-   it.only('PUT: should modify an existing users data set.', function(){
+   it.only('PUT: should modify an existing users data set.', function(done){
      const updateData = {
        user: {},
        userData: {},
@@ -186,23 +186,29 @@ describe('Userdata API', function() {
      return UserData
       .findOne()
       .then(function(record){
-        // console.log("record: ",record);
+        console.log("Pre-record: ",record);
         updateData.id = record.id;
         updateData.user = record.currentUser.user;
         updateData.userData = record.currentUser.userData;
         updateData.lastQuizData = record.currentUser.lastQuizData;
         updateData.userData.totalCorrect = record.currentUser.userData.totalCorrect + 9;
-
-      return chai.request(app)
-          .put(`/api/userdata/${updateData.id}`)
-          .send(updateData)
+        console.log("**updateData: ", updateData);
+        console.log("**findRecord: ", record);
+        chai.request(app)
+            .put(`/api/userdata/${updateData.id}`)
+            .send(updateData)
+            .end(function(err, res){
+              res.should.status.have.status(200);
+              done();
+            })
       })
       // .then(function(res){
-      //   // console.log("**RES: ",res.body)
-      //   expect(res).to.have.status(204);
-      //
-      //   // return UserData.findById(updateData.id);
+      // //   // console.log("**RES: ",res.body)
+      // //   expect(res).to.have.status(204);
+      // //
+      // //   // return UserData.findById(updateData.id);
       // })
+      // .catch(function(err))
 
    });
 
