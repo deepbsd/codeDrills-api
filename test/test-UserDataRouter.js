@@ -89,7 +89,6 @@ function seedUserData() {
     seedData.push(generateUserData());
   }
   // this will return a promise
-  console.log("*** seedData... ");
   return UserData.insertMany(seedData);
 }
 
@@ -128,7 +127,6 @@ describe('Userdata API', function() {
         expect(res).to.be.json;
         expect(res.body).to.be.a('object');
         expect(res.body).to.have.all.keys('userdata');
-        console.log("**res.body.userdata: ",res.body.userdata);
         expect(res.body.userdata).to.be.a('array');
         expect(res.body.userdata.length).to.be.above(0);
         res.body.userdata.forEach(function(item){
@@ -142,67 +140,36 @@ describe('Userdata API', function() {
   });
 
    it('POST: should add 1 new userData sets', function() {
-
+     const userDataFields = [
+       'numberOfQuizzes', 'totalQuestions', 'totalCorrect', 'jsQuestionsAnswered', 'jsQuestionsCorrect',
+       'cssQuestionsAnswered', 'cssQuestionsCorrect', 'htmlQuestionsAnswered', 'htmlQuestionsCorrect',
+       'nodeQuestionsAnswered', 'nodeQuestionsCorrect', 'apiQuestionsAnswered', 'apiQuestionsCorrect',
+       'mongoQuestionsAnswered', 'mongoQuestionsCorrect' ];
      const newDataSet = generateUser();
-     console.log("**Here's the dataset: ",newDataSet);
      return chai.request(app)
        .post('/api/userdata/')
        .send(newDataSet)
        .then(function(res) {
-         console.log("***RES.body: ",res.body)
          expect(res).to.have.status(201);
          expect(res).to.be.json;
          expect(res.body).to.be.a('object');
-         // expect(res.body).to.include.keys(
-         //   'user', 'userData', 'lastQuizData');
-         // expect(res.body.name).to.equal(newRestaurant.name);
-         // // cause Mongo should have created id on insertion
-         // expect(res.body.id).to.not.be.null;
-         // expect(res.body.cuisine).to.equal(newRestaurant.cuisine);
-         // expect(res.body.borough).to.equal(newRestaurant.borough);
-         //
-         // mostRecentGrade = newRestaurant.grades.sort(
-         //   (a, b) => b.date - a.date)[0].grade;
-         //
-         // expect(res.body.grade).to.equal(mostRecentGrade);
-         // return Restaurant.findById(res.body.id);
+         expect(res.body.currentUser).to.include.keys(
+           'user', 'userData', 'lastQuizData');
+         expect(res.body.currentUser.user).to.include.keys(
+           'username', 'firstName', 'lastName'
+         );
+         expect(res.body.currentUser.lastQuizData).to.include.keys(
+           'totalQuestions', 'totalCorrect', 'dateOfQuiz'
+         );
+         userDataFields.forEach(function(field){
+           expect(res.body.currentUser.userData).to.include.key(field)
+         });
+         userDataFields.forEach(function(field){
+            expect(res.body.currentUser.userData[field]).to.equal(0);
+         });
        })
-       // .then(function(restaurant) {
-       //   expect(restaurant.name).to.equal(newRestaurant.name);
-       //   expect(restaurant.cuisine).to.equal(newRestaurant.cuisine);
-       //   expect(restaurant.borough).to.equal(newRestaurant.borough);
-       //   expect(restaurant.grade).to.equal(mostRecentGrade);
-       //   expect(restaurant.address.building).to.equal(newRestaurant.address.building);
-       //   expect(restaurant.address.street).to.equal(newRestaurant.address.street);
-       //   expect(restaurant.address.zipcode).to.equal(newRestaurant.address.zipcode);
-       // });
    });
 
 
 
 });
-
-//
-// // This is how client creates a users data record:
-// export const createNewUserData = (currentUser) => dispatch => {
-//   console.log("***CURRENT USER: ", currentUser)
-//   fetch(`${API_BASE_URL}/userdata/`, {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       username: currentUser.username,
-//       firstName: currentUser.firstName,
-//       lastName: currentUser.lastName
-//     })
-//   })
-//   .then(results => {
-//     if (!results.ok){
-//       console.log('OOPS!  Did not post new userData!', results);
-//       return Promise.reject(results.statusText);
-//     }
-//     console.log("ACTION --createNewUserData: ", results);
-//     return results.json();
-//   })

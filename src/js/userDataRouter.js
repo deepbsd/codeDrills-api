@@ -85,7 +85,8 @@ const userDataSkeleton = {
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ["username", "firstName", "lastName"];
     const keys = Object.keys(req.body);
-    console.log("*****REQ.BODY: ",req.body)
+    // Turn this log when you want to inspect the body...
+    // console.log("*****REQ.BODY: ",req.body)
     for (let i=0; i<requiredFields.length; i++){
       const field = keys[i];
     if (!(field in req.body)){
@@ -100,9 +101,11 @@ router.post('/', jsonParser, (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName
   }
-  const item = UserData.create(newEntry);
-  console.log("SUCCESS!  You have created an entry!", item);
-  res.status(201).json(item);
+  UserData.create(newEntry)
+  .then(function(item){
+    console.log("SUCCESS!  You have created an entry!");
+    res.status(201).json(item);
+  })
 });
 
 
