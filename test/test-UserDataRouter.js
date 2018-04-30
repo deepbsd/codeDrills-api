@@ -33,7 +33,8 @@ function createUserData(){
     missedQuestions: Math.round((numOfQuizzes * 10) * avgPctg),
     numberOfQuizzes: numOfQuizzes,
     totalQuestions: 10*numOfQuizzes,
-    totalCorrect: (10*numOfQuizzes)-Math.round((numOfQuizzes*10)*avgPctg),
+    // totalCorrect: (10*numOfQuizzes)-Math.round((numOfQuizzes*10)*avgPctg),
+    totalCorrect: avgAnswered*5,
     jsQuestionsAnswered: avgAnswered+leftOver || 0,
     jsQuestionsCorrect: Math.round(avgAnswered*avgPctg),
     cssQuestionsAnswered: avgAnswered,
@@ -170,6 +171,40 @@ describe('Userdata API', function() {
        })
    });
 
+
+    // strategy:
+    //  1. Get an existing restaurant from db
+    //  2. Make a PUT request to update that restaurant
+    //  3. Prove restaurant returned by request contains data we sent
+    //  4. Prove restaurant in db is correctly updated
+   it.only('PUT: should modify an existing users data set.', function(){
+     const updateData = {
+       user: {},
+       userData: {},
+       lastQuizData: {}
+     }
+     return UserData
+      .findOne()
+      .then(function(record){
+        // console.log("record: ",record);
+        updateData.id = record.id;
+        updateData.user = record.currentUser.user;
+        updateData.userData = record.currentUser.userData;
+        updateData.lastQuizData = record.currentUser.lastQuizData;
+        updateData.userData.totalCorrect = record.currentUser.userData.totalCorrect + 9;
+
+      return chai.request(app)
+          .put(`/api/userdata/${updateData.id}`)
+          .send(updateData)
+      })
+      // .then(function(res){
+      //   // console.log("**RES: ",res.body)
+      //   expect(res).to.have.status(204);
+      //
+      //   // return UserData.findById(updateData.id);
+      // })
+
+   });
 
 
 });

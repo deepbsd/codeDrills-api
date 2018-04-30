@@ -127,7 +127,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   // ## req.body must contain the three main userData components
   requiredUserDataObjects.forEach(name => {
-    console.log("### Suspect Obj: ", req.body);
+    // console.log("### Suspect Obj: ", req.body);
     if (!(Object.keys(req.body).includes(name))){
       const message = `Missing ${name} in request body`;
       console.error(message);
@@ -162,33 +162,6 @@ router.put('/:id', jsonParser, (req, res) => {
     }
   })
 
-
-  //
-  // function getUserInfo(id){
-  //   User.findById(id).exec(function(err, user){
-  //     info.username = user.username,
-  //     info.firstName = user.firstName
-  //   });
-  //   console.log('user: ',info );
-  //
-  // }
-  //
-  // Get the userdata
-  // const userDataUserQuery = getUserInfo(req.params.id);
-  // userDataUserQuery.exec(function(err, user){
-  //   if (err) { return console.log(err)}
-  //   return user
-  // })
-
-  // Modify the user info so that it doesn't have password hashes
-  // and other needless stuff for this object
-  // const updatedUserInfo = {
-  //   "username": userDataUserQuery.username,
-  //   "firstName": userDataUserQuery.firstName,
-  //   "lastName": userDataUserQuery.lastName
-  // }
-
-  // Looks like all the pieces are present, so let's assemble the new object
   const updatedUserData = {
         "numberOfQuizzes": req.body.userData.numberOfQuizzes,
         "totalQuestions": req.body.userData.totalQuestions,
@@ -234,25 +207,7 @@ router.put('/:id', jsonParser, (req, res) => {
     return UserData
       .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
   })
-  // .then(updatedData => {
-  //   console.log("** updatedData ", updatedData)
-  //   res.status(201).json(updatedData)
-  // })
   .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
-
-
-
-  //
-  // //Log this stuff out...
-  // console.log("***newCurrentUser ", userDataUserQuery);
-
-
-  // Now lets submit the new object to the database
-//   UserData
-//     .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {upsert: true, new: true})
-//     .exec()
-//     .then(updatedData => res.status(201).json(updatedData))
-//     .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
 });
 
 
