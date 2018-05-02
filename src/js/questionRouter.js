@@ -27,12 +27,14 @@ router.get('/', (req,res) => {
 
 // can also request by ID
 //////////////////////////
-router.get('/questions/:id', (req, res) => {
+router.get('/:id', (req, res) => {
+  console.log("**REQ ",req.params);
   Question
     // this is a convenience method Mongoose provides for searching
     // by the object _id property
     .findById(req.params.id)
-    .then(question => res.json(question.serialize()))
+    .exec()
+    .then(question => res.json(question.apiRepr()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ message: 'Internal server error' });
@@ -41,7 +43,7 @@ router.get('/questions/:id', (req, res) => {
 
 // Add new questions to db
 ////////////////////////////
-router.post('/questions', (req, res) => {
+router.post('/', (req, res) => {
 
   const requiredFields = ['number', 'question', 'category', 'assetUrl', 'type', 'answers'];
   for (let i = 0; i < requiredFields.length; i++) {
@@ -57,10 +59,10 @@ router.post('/questions', (req, res) => {
   // All answers lists must have only one correct answer
   const answerFields = ['answerText', 'chosen']
   const answers = req.body.answers;
-  const hasCorrect = false;
+  let hasCorrect = false;
   for (let i = 0; i<answers.length; i++){
-    const correctAnswer = 0;
-    const answer = answers[i];
+    let correctAnswer = 0;
+    let answer = answers[i];
     let field1 = answerFields[0];
     let field2 = answerFields[1];
     if (!(field1 in req.body.answers[i]) || !(field2 in req.body.answers[i])){
@@ -103,7 +105,7 @@ router.post('/questions', (req, res) => {
 
 // Update a question
 ///////////////////////
-router.put('/questions/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   // ensure that the id in the request path and the one in request body match
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -114,7 +116,8 @@ router.put('/questions/:id', (req, res) => {
   }
 
   //**********************************************************
-  //*** Need to add checks for 5 answers and 1 correct answer
+  //*** 1) Modify to update answers array individually!!!!
+  //*** 2) Need to add checks for 5 answers and 1 correct answer
   //*** on each of req.body.answers
   //**********************************************************
 
@@ -140,7 +143,7 @@ router.put('/questions/:id', (req, res) => {
 
 // Delete a Question
 //////////////////////
-router.delete('/questions/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   Question
     .findByIdAndRemove(req.params.id)
     .then(question => res.status(204).end())
