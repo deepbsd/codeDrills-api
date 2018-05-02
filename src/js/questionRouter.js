@@ -27,7 +27,7 @@ router.get('/', (req,res) => {
 
 // can also request by ID
 //////////////////////////
-app.get('/questions/:id', (req, res) => {
+router.get('/questions/:id', (req, res) => {
   Question
     // this is a convenience method Mongoose provides for searching
     // by the object _id property
@@ -41,7 +41,7 @@ app.get('/questions/:id', (req, res) => {
 
 // Add new questions to db
 ////////////////////////////
-app.post('/questions', (req, res) => {
+router.post('/questions', (req, res) => {
 
   const requiredFields = ['number', 'question', 'category', 'assetUrl', 'type', 'answers'];
   for (let i = 0; i < requiredFields.length; i++) {
@@ -103,7 +103,7 @@ app.post('/questions', (req, res) => {
 
 // Update a question
 ///////////////////////
-app.put('/questions/:id', (req, res) => {
+router.put('/questions/:id', (req, res) => {
   // ensure that the id in the request path and the one in request body match
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -140,7 +140,7 @@ app.put('/questions/:id', (req, res) => {
 
 // Delete a Question
 //////////////////////
-app.delete('/questions/:id', (req, res) => {
+router.delete('/questions/:id', (req, res) => {
   Question
     .findByIdAndRemove(req.params.id)
     .then(question => res.status(204).end())
