@@ -84,7 +84,7 @@ function generateUserData(){
 
 
 function seedUserData() {
-  console.info('seeding user data');
+  // console.info('seeding user data');
   const seedData = [];
   const usersData = [];
 
@@ -94,7 +94,6 @@ function seedUserData() {
     usrData.password = "password99";
     seedData.push(newData);
     usersData.push(usrData);
-    // console.log("usersData: ",usersData);
   }
   // this will return a promise
   return UserData.insertMany(seedData)
@@ -116,12 +115,12 @@ describe('Userdata API', function() {
   });
 
   beforeEach(function() {
-    console.log("***firing seedUserData...");
+    // console.log("***firing seedUserData...");
     return seedUserData();
   });
 
   afterEach(function() {
-    console.log("*** tearing down DB...");
+    // console.log("*** tearing down DB...");
     return tearDownDb();
   });
 
@@ -186,11 +185,11 @@ describe('Userdata API', function() {
 
 
     // strategy:
-    //  1. Get an existing restaurant from db
-    //  2. Make a PUT request to update that restaurant
-    //  3. Prove restaurant returned by request contains data we sent
-    //  4. Prove restaurant in db is correctly updated
-   it.only('PUT: should modify an existing users data set.', function(done){
+    //  1. Get an existing users data from db
+    //  2. Make a PUT request to update that dataset
+    //  3. Prove data set returned by request contains data we sent
+    //  4. Prove data set in db is correctly updated
+   it('PUT: should modify an existing users data set.', function(){
      const updateData = {
        user: {},
        userData: {},
@@ -199,31 +198,55 @@ describe('Userdata API', function() {
      return UserData
       .findOne()
       .then(function(record){
-        console.log("Pre-record: ",record);
+        // console.log("Pre-record: ",record);
         updateData.id = record.id;
         updateData.user = record.currentUser.user;
         updateData.userData = record.currentUser.userData;
         updateData.lastQuizData = record.currentUser.lastQuizData;
         updateData.userData.totalCorrect = record.currentUser.userData.totalCorrect + 9;
-        console.log("**updateData: ", updateData);
-        console.log("**findRecord: ", record);
+        // console.log("**updateData: ", updateData);
+        // console.log("**findRecord: ", record);
         return chai.request(app)
             .put(`/api/userdata/${updateData.id}`)
             .send(updateData)
       })
       .then(function(res){
         expect(res).to.have.status(204);
-      //   return UserData.findById(updateData.id);
-      // })
-      // .then(function(usersData){
-      //   expect(usersData.userData.totalCorrect).to.equal(record.currentUser.userData.totalCorrect);
-      //   expect(usersData.userData.totalQuestions).to.equal(record.currentUser.userData.totalQuestions);
+        return UserData.findById(updateData.id);
+      })
+      .then(function(usersData){
+        expect(usersData.currentUser.userData.totalCorrect).to.equal(updateData.userData.totalCorrect);
+        expect(usersData.currentUser.userData.totalQuestions).to.equal(updateData.userData.totalQuestions);
       })
       .catch(function(err){
         console.log("There was an error with the PUT test: ", err);
       })
-
    });
+
+
+   // strategy:
+   //  1. get a user's dataset
+   //  2. make a DELETE request for that userdata's id
+   //  3. assert that response has right status code
+   //  4. prove that users dataset with the id doesn't exist in db anymore
+     it('DELETE: delete a dataset by id', function() {
+       let dataset;
+
+       return UserData
+         .findOne()
+         .then(function(_dataset) {
+           dataset = _dataset;
+           return chai.request(app).delete(`/api/userdata/${dataset.id}`);
+         })
+         .then(function(res) {
+           expect(res).to.have.status(204);
+           return UserData.findById(dataset.id);
+         })
+         .then(function(_dataset) {
+           expect(_dataset).to.be.null;
+         });
+     });
+
 
 
 });

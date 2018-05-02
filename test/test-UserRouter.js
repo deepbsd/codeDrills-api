@@ -98,7 +98,7 @@ describe('User API', function() {
 
   it('should add an item on POST', function() {
     const newUser = generateUserData();
-    console.log("**Payload: ",newUser)
+    // console.log("**Payload: ",newUser)
     return chai.request(app)
       .post('/api/users/')
       .send(newUser)
@@ -122,18 +122,18 @@ describe('User API', function() {
   const newItem = generateUserData();
 
   it('should delete an item on DELETE', function() {
-    console.log("**Payload: ", newItem);
+    // console.log("**Payload: ", newItem);
     return chai.request(app)
       .post('/api/users/')
       .send(newItem)
       .then(function(res) {
-        console.log("**Res: ", res.body);
+        // console.log("**Res: ", res.body);
         const newUser = res.body;
         expect(newUser.id).to.not.equal(null);
         return User.findById(newUser.id);
       })
       .then(function(newUser){
-        console.log("**newUser: ", newUser);
+        // console.log("**newUser: ", newUser);
         return chai.request(app)
         .delete(`/api/users/${newUser.id}`)
       })

@@ -116,7 +116,6 @@ router.post('/', jsonParser, (req, res) => {
       return User.hashPassword(password);
     })
     .then(hash => {
-      console.log("**HASH defined? ", hash);
       return User.create({
         username,
         password: hash,
@@ -147,7 +146,6 @@ router.get('/:username', (req,res) => {
 
   return UserData.findOne({ "currentUser.user.username": username })
     .then( data => {
-      console.log("***API: ",data)
       res.json(data)
     })
     .catch( err => res.status(500).json( {message: 'bore me to tears!'}));

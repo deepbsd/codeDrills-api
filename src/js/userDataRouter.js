@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
   .findById(req.params.id)
   .exec()
   .then(userdata => {
-    console.log("API  --userData: ", userdata);
+    // console.log("API  --userData: ", userdata);
     res.json({
       userdata: userdata.apiRepr()
     })
@@ -85,8 +85,8 @@ const userDataSkeleton = {
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ["username", "firstName", "lastName"];
     const keys = Object.keys(req.body);
-    // Turn this log when you want to inspect the body...
-    // console.log("*****REQ.BODY: ",req.body)
+    // Turn this log on when you want to inspect the body...
+    // console.log("***REQ.BODY: ",req.body)
     for (let i=0; i<requiredFields.length; i++){
       const field = keys[i];
     if (!(field in req.body)){
@@ -113,7 +113,6 @@ router.post('/', jsonParser, (req, res) => {
 router.put('/:id', jsonParser, (req, res) => {
   // ## user ids must match  user id must be same for params and db record
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    console.log("FIRST: --hey!", req.body.id);
     return res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
@@ -198,7 +197,6 @@ router.put('/:id', jsonParser, (req, res) => {
   User.findOne({"username":req.body.user.username})
     .exec()
     .then( user => {
-      console.log("NULL?? ",user);
       const newCurrentUser = {
         currentUser: {
           "user": {
@@ -210,11 +208,10 @@ router.put('/:id', jsonParser, (req, res) => {
           "lastQuizData": updatedLastQuizData,
         }
       }
-      console.log("***USER ",user);
+      // console.log("***USER ",user);
       return UserData
         .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
         .then(userdata => {
-          console.log("***UPDATE: ",userdata);
           res.status(204).end();
         })
         .catch(err => {
@@ -223,7 +220,6 @@ router.put('/:id', jsonParser, (req, res) => {
         })
     })
   .catch(err => {
-    console.log("ERROR2: ",err);
     return res.status(500).json(
     {message: "Error: Data NOT Updated!", key: req.body.user.username}
   )});
