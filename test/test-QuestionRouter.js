@@ -36,9 +36,9 @@ describe('Question API', function() {
           expect(item.answers.length).to.equal(5);
           item.answers.forEach(function(item){
             expect(item).to.be.a('object');
-            // expect(item).to.contain.all.keys(
-            //   'answerText', 'chosen', 'correct'
-            // )
+            expect(item).to.contain.all.keys(
+              'answerText', 'chosen'
+            )
           })
         });
       });
