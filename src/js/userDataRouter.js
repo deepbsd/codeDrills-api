@@ -112,8 +112,9 @@ router.post('/', jsonParser, (req, res) => {
 // Update a user's userData file in the database
 router.put('/:id', jsonParser, (req, res) => {
   // ## user ids must match  user id must be same for params and db record
-  if (!(req.params.id && req.body._id && req.params.id === req.body._id)) {
-    res.status(400).json({
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    console.log("FIRST: --hey!", req.body.id);
+    return res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }
@@ -190,26 +191,42 @@ router.put('/:id', jsonParser, (req, res) => {
   let info = {};
 
 
+  console.log("USERNAME: ",req.body.user.username);
+
+
   // Function to get the user data
-  User.findOne({"username":req.body.user.username}).then( user => {
-    const newCurrentUser = {
-      currentUser: {
-        "user": {
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName
-        },
-        "userData": updatedUserData,
-        "lastQuizData": updatedLastQuizData,
+  User.findOne({"username":req.body.user.username})
+    .exec()
+    .then( user => {
+      console.log("NULL?? ",user);
+      const newCurrentUser = {
+        currentUser: {
+          "user": {
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+          },
+          "userData": updatedUserData,
+          "lastQuizData": updatedLastQuizData,
+        }
       }
-    }
-    console.log("***USER ",user);
-    return UserData
-      .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
-    .then(userdata => res.status(204).end())
-      // .catch(err => res.status(500).json({ message: 'Internal server error' }));
-  })
-  .catch(err => res.status(500).json( {message: "Error: Data NOT Updated!"}));
+      console.log("***USER ",user);
+      return UserData
+        .findByIdAndUpdate(req.params.id, {$set: newCurrentUser}, {new: true})
+        .then(userdata => {
+          console.log("***UPDATE: ",userdata);
+          res.status(204).end();
+        })
+        .catch(err => {
+          console.log("ERROR: ",err);
+          return res.status(500).json({ message: 'X---Internal server error' });
+        })
+    })
+  .catch(err => {
+    console.log("ERROR2: ",err);
+    return res.status(500).json(
+    {message: "Error: Data NOT Updated!", key: req.body.user.username}
+  )});
 });
 
 

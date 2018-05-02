@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const {app, runServer, closeServer} = require('../server');
 const {UserData} = require('../src/js/userDataModel');
+const {User} = require('../users/models');
 
 const expect = chai.expect;
 const {TEST_DATABASE_URL} = require('../config');
@@ -85,12 +86,24 @@ function generateUserData(){
 function seedUserData() {
   console.info('seeding user data');
   const seedData = [];
+  const usersData = [];
 
   for (let i=1; i<=10; i++) {
-    seedData.push(generateUserData());
+    let newData = generateUserData();
+    let usrData = newData.currentUser.user;
+    usrData.password = "password99";
+    seedData.push(newData);
+    usersData.push(usrData);
+    // console.log("usersData: ",usersData);
   }
   // this will return a promise
-  return UserData.insertMany(seedData);
+  return UserData.insertMany(seedData)
+  .then( () => {
+    return User.insertMany(usersData)
+  })
+  .catch(err => {
+    console.log("Seeding Error: ",err)
+  })
 }
 
 
@@ -194,21 +207,21 @@ describe('Userdata API', function() {
         updateData.userData.totalCorrect = record.currentUser.userData.totalCorrect + 9;
         console.log("**updateData: ", updateData);
         console.log("**findRecord: ", record);
-        chai.request(app)
+        return chai.request(app)
             .put(`/api/userdata/${updateData.id}`)
             .send(updateData)
-            .end(function(err, res){
-              res.should.status.have.status(200);
-              done();
-            })
       })
-      // .then(function(res){
-      // //   // console.log("**RES: ",res.body)
-      // //   expect(res).to.have.status(204);
-      // //
-      // //   // return UserData.findById(updateData.id);
+      .then(function(res){
+        expect(res).to.have.status(204);
+      //   return UserData.findById(updateData.id);
       // })
-      // .catch(function(err))
+      // .then(function(usersData){
+      //   expect(usersData.userData.totalCorrect).to.equal(record.currentUser.userData.totalCorrect);
+      //   expect(usersData.userData.totalQuestions).to.equal(record.currentUser.userData.totalQuestions);
+      })
+      .catch(function(err){
+        console.log("There was an error with the PUT test: ", err);
+      })
 
    });
 
