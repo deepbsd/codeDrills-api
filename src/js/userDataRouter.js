@@ -191,7 +191,7 @@ router.put('/:id', jsonParser, (req, res) => {
   let info = {};
 
 
-  console.log("USERNAME: ",req.body.user.username);
+  // console.log("USERNAME: ",req.body.user.username);
 
 
   // Function to get the user data
