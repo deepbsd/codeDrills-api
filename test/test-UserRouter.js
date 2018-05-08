@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const {app, runServer, closeServer} = require('../server');
 const {User} = require('../users/models');
+const {UserData} = require('../src/js/userDataModel');
 const expect = chai.expect;
 
 const {TEST_DATABASE_URL} = require('../config');
@@ -16,8 +17,8 @@ chai.use(chaiHttp);
 // to ensure data from one test does not stick
 // around for next one
 function tearDownDb() {
-  console.warn('Deleting database');
-  return mongoose.connection.dropDatabase();
+    console.warn('Deleting database');
+    return mongoose.connection.dropDatabase();
 }
 
 // password must be between 10 - 75 characters long
@@ -40,6 +41,31 @@ function generateUserData(){
   };
 }
 
+const fakeUserData = {
+	missedQuestions: [1,2,3],
+	numberOfQuizzes: 1,
+	totalQuestions:  10,
+	totalQuestions:  7,
+	jsQuestionsAnswered: 4,
+	jsQuestionsCorrect: 4,
+	cssQuestionsAnswered: 1,
+	cssQuestionsAnswered: 1,
+	htmlQuestionsAnswered: 1,
+	htmlQuestionsCorrect: 1,
+	nodeQuestionsAnswered: 4,
+	nodeQuestionsCorrect: 1,
+	apiQuestionsAnswered: 1,
+	apiQuestionsCorrect: 1,
+	mongoQuestionsAnswered: 0,
+	mongoQuestionsCorrect: 0
+}
+
+const fakeLastQuizData = {
+	totalQuestions: 10,
+	dateOfQuiz: new Date(),
+	totalCorrect: 7
+}
+
 // used to put randomish documents in db
 // so we have data to work with and assert about.
 // we use the Faker library to automatically
@@ -48,12 +74,26 @@ function generateUserData(){
 function seedUserData() {
   console.info('seeding user data');
   const seedData = [];
+  const usersFakeData = [];
+  let fakeUser;
 
-  for (let i=1; i<=10; i++) {
-    seedData.push(generateUserData());
+  for (let i=0; i<10; i++) {
+	fakeUser = generateUserData();
+    seedData.push(fakeUser);
+    let usrFakeData = {
+  	  user: fakeUser,
+      userData: fakeUserData,
+      lastQuizData: fakeLastQuizData,
+	 };
+	usersFakeData.push(usrFakeData);
+    console.log("Are usernames same? ",usersFakeData[i].user.username, '; ',seedData[i].username);
   }
   // this will return a promise
-  return User.insertMany(seedData);
+  return User.insertMany(seedData)
+    .then(function(){
+	  console.log("Fake User's Data: ", usersFakeData)
+      return UserData.insertMany(usersFakeData)
+   });
 }
 
 
@@ -92,6 +132,27 @@ describe('User API', function() {
           )
         })
       });
+  });
+
+  // Method for getting username on /api/users involves getting object from /api/userdata
+  // endpoint...
+  it.only('should get 200 on GET request for individual username and return correct data for user', function(){
+	// Fake users should already be in database for this test
+	let user;
+	return User
+	  .findOne()
+	  .then(_user => {
+		user = _user
+		console.log("**User: ",user.username)
+		return chai.request(app)
+		  .get(`/api/users/${user.username}`)
+	  })
+	.then(res => {
+	  expect(res).to.have.status(200);
+	  console.log("**res.body: ",res.body);
+	  //expect(res.body).to.be.a('object');
+	  //expect(res.body.id).to.equal(user.id);
+	})
   });
 
 

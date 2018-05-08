@@ -45,6 +45,7 @@ router.get('/:id', (req, res) => {
 ////////////////////////////
 router.post('/', (req, res) => {
 
+  console.log("Hitting Questions POST endpoint...");
   const requiredFields = ['number', 'question', 'category', 'assetUrl', 'type', 'answers'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -114,25 +115,50 @@ router.put('/:id', (req, res) => {
     console.error(message);
     return res.status(400).json({ message: message });
   }
+  
 
-  //**********************************************************
-  //*** 1) Modify to update answers array individually!!!!
-  //*** 2) Need to add checks for 5 answers and 1 correct answer
-  //*** on each of req.body.answers
-  //**********************************************************
+  // Answers array must be complete and present
+  if ((req.body.answers) && !(req.body.answers.length===5)){
+    const message = (
+      `Length of answers array should be 5.  Provided length is ${res.body.answers.length}.`)
+	  console.error(message);
+	  return res.status(400).json( {message: message}  );
+  }
+  
+  
+  // Answers array should contain one and only 1 correct answer if it exists
+  if (req.body.answers) { 
+     let AnswerArr = req.body.answers; 
+     let hasOne = false;
+     let countCorrect = 0;
+     AnswerArr.forEach(function(answer){
+       if (answer.correct) {
+         hasOne = true;
+         countCorrect += 1;
+       }
+     })
+     if (!(hasOne) || (countCorrect>1)){
+       const message = "Either too many right answers or no one single correct answer has been desginated."
+       return res.status(400).json( {message: message} );
+     }
+  }
+  
 
   // we only support a subset of fields being updateable.
   // if the user sent over any of the updatableFields, we udpate those values
   // in document
   const toUpdate = {};
+  // 'number' field is not updatable
   const updateableFields = ['question', 'category', 'assetUrl', 'answers'];
 
+  // create a toUpdate Object...
   updateableFields.forEach(field => {
     if (field in req.body) {
       toUpdate[field] = req.body[field];
     }
   });
 
+  
   Question
     // all key/value pairs in toUpdate will be updated -- that's what `$set` does
     .findByIdAndUpdate(req.params.id, { $set: toUpdate })
