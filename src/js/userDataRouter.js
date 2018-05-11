@@ -28,14 +28,16 @@ router.get('/', (req, res) => {
 });
 
 // GET userData file for specific userId
-router.get('/:id', (req, res) => {
+//router.get('/:id', (req, res) => {
+router.get('/:username', (req, res) => {
   return UserData
-  .findById(req.params.id)
+  //.findById(req.params.id)
+  .find({"currentUser.user.username": req.params.username})
   .exec()
   .then(userdata => {
-    // console.log("API  --userData: ", userdata);
+    console.log("API  --userData: ", userdata[0].currentUser.user.username);
     res.json({
-      userdata: userdata.apiRepr()
+      userdata: userdata[0].apiRepr()
     })
   })
   .catch(err => {

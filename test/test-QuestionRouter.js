@@ -140,6 +140,28 @@ describe('Question API', function() {
   });
 
 
+
+  // Get single question
+  it('should return a single question by id', function() {
+  // strategy:
+  //    1. Get a question from db
+  //    2. Prove you can retrieve it by id at `/questions/:id`
+  let question;
+    return Question
+    .findOne()
+    .then(_question => {
+      question = _question
+      return chai.request(app)
+        .get(`/api/questions/${question.id}`);
+    })
+   .then(res => {
+     expect(res).to.have.status(200);
+     expect(res.body.id).to.equal(question.id);
+   })
+  })
+
+
+
   it('should POST a single question', function() {
       // strategy:
       //    1. Post a single question with answers to endpoint

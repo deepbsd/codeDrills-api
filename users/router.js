@@ -141,28 +141,28 @@ router.post('/', jsonParser, (req, res) => {
 // Used when creating a new user and creating new userData
 // Right now there is no endpoint that returns only user info
 // for /:username
-router.get('/:username', (req,res) => {
-  const username = req.params.username;
+//router.get('/:username', (req,res) => {
+//  const username = req.params.username;
+//
+//  return UserData.findOne({ "currentUser.user.username": username })
+//    .then( data => {
+//      res.json(data)
+//    })
+//    .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
+//});
 
-  return UserData.findOne({ "currentUser.user.username": username })
+//GET a user by id
+router.get('/:id', (req,res) => {
+
+  return User
+    .findById(req.params.id)
+    .exec()
     .then( data => {
+      //console.log("***API: ",data)
       res.json(data)
     })
-    .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
+    .catch( err => res.status(500).json( {message: 'No such user!'}));
 });
-
-// GET a user by id
-// router.get('/:id', (req,res) => {
-//
-//   return User
-//     .findById(req.params.id)
-//     .exec()
-//     .then( data => {
-//       console.log("***API: ",data)
-//       res.json(data)
-//     })
-//     .catch( err => res.status(500).json( {message: 'No such user!'}));
-// });
 
 // *** DELETE a user ***
 router.delete('/:id', (req, res) => {

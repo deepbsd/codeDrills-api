@@ -86,12 +86,12 @@ function seedUserData() {
       lastQuizData: fakeLastQuizData,
 	 };
 	usersFakeData.push(usrFakeData);
-    console.log("Are usernames same? ",usersFakeData[i].user.username, '; ',seedData[i].username);
+    //console.log("Are usernames same? ",usersFakeData[i].user.username, '; ',seedData[i].username);
   }
   // this will return a promise
   return User.insertMany(seedData)
     .then(function(){
-	  console.log("Fake User's Data: ", usersFakeData)
+	  //console.log("Fake User's Data: ", usersFakeData)
       return UserData.insertMany(usersFakeData)
    });
 }
@@ -136,22 +136,22 @@ describe('User API', function() {
 
   // Method for getting username on /api/users involves getting object from /api/userdata
   // endpoint...
-  it.only('should get 200 on GET request for individual username and return correct data for user', function(){
+  it('should get 200 on GET request for individual username and return correct data for user', function(){
 	// Fake users should already be in database for this test
 	let user;
 	return User
 	  .findOne()
 	  .then(_user => {
 		user = _user
-		console.log("**User: ",user.username)
+		//console.log("**User: ",user.username)
 		return chai.request(app)
-		  .get(`/api/users/${user.username}`)
+		  .get(`/api/users/${user.id}`)
 	  })
 	.then(res => {
 	  expect(res).to.have.status(200);
-	  console.log("**res.body: ",res.body);
-	  //expect(res.body).to.be.a('object');
-	  //expect(res.body.id).to.equal(user.id);
+	  //console.log("**res.body: ",res.body);
+	  expect(res.body).to.be.a('object');
+	  expect(res.body._id).to.equal(user.id);
 	})
   });
 

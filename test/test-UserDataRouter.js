@@ -130,7 +130,7 @@ describe('Userdata API', function() {
 
 
 
-  it('should get 200 on GET requests and return correct objects and keys', function() {
+  it('GET: should get 200 on GET requests and return correct objects and keys', function() {
     let res;
     return chai.request(app)
       .get('/api/userdata')
@@ -152,6 +152,31 @@ describe('Userdata API', function() {
 
   });
 
+
+   it.only('GET: should return a single users dataset by username', function() {
+     // strategy:
+     //    1. Get a dataset from db
+     //    2. Prove you can retrieve it by id at `/api/userdata/:id`
+     let dataset;
+     return UserData
+       .findOne()
+       .then(_dataset => {
+         dataset = _dataset
+         return chai.request(app)
+           .get(`/api/userdata/${dataset.currentUser.user.username}`);
+       })
+       .then(res => {
+	     console.log("RES.body.userdata.currentUser.user",res.body.userdata.currentUser.user);
+	     console.log("dataset.currentUser.user",dataset.currentUser.user);
+         expect(res).to.have.status(200);
+         expect(res.body.userdata.currentUser.user.username).to.equal(dataset.currentUser.user.username);
+		 //expect(res.body.userdata.currentUser.userData).to.deep.equal(dataset.currentUser.userData)
+		 expect(res.body.userdata.currentUser.user).to.deep.equal(dataset.currentUser.user)
+		 //expect(res.body.userdata.currentUser.userdata.lastQuizData).to.deep.equal(dataset..currentUser.lastQuizData)
+       })
+   })
+
+  
    it('POST: should add 1 new userData sets', function() {
      const userDataFields = [
        'numberOfQuizzes', 'totalQuestions', 'totalCorrect', 'jsQuestionsAnswered', 'jsQuestionsCorrect',
