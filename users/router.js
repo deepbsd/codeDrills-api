@@ -151,6 +151,9 @@ router.post('/', jsonParser, (req, res) => {
 //    .catch( err => res.status(500).json( {message: 'bore me to tears!'}));
 //});
 
+
+// Need to make sure nothing calls this method that is expecting a username
+
 //GET a user by id
 router.get('/:id', (req,res) => {
 

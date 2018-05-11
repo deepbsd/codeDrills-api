@@ -134,8 +134,8 @@ describe('User API', function() {
       });
   });
 
-  // Method for getting username on /api/users involves getting object from /api/userdata
-  // endpoint...
+  
+ 
   it('should get 200 on GET request for individual username and return correct data for user', function(){
 	// Fake users should already be in database for this test
 	let user;

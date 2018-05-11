@@ -153,7 +153,7 @@ describe('Userdata API', function() {
   });
 
 
-   it.only('GET: should return a single users dataset by username', function() {
+   it('GET: should return a single users dataset by username', function() {
      // strategy:
      //    1. Get a dataset from db
      //    2. Prove you can retrieve it by id at `/api/userdata/:id`
@@ -166,13 +166,33 @@ describe('Userdata API', function() {
            .get(`/api/userdata/${dataset.currentUser.user.username}`);
        })
        .then(res => {
-	     console.log("RES.body.userdata.currentUser.user",res.body.userdata.currentUser.user);
-	     console.log("dataset.currentUser.user",dataset.currentUser.user);
+	     console.log("RES.body.currentUser.user",res.body.currentUser.userData);
+	     console.log("dataset.currentUser.user",dataset.currentUser.userData);
          expect(res).to.have.status(200);
-         expect(res.body.userdata.currentUser.user.username).to.equal(dataset.currentUser.user.username);
-		 //expect(res.body.userdata.currentUser.userData).to.deep.equal(dataset.currentUser.userData)
-		 expect(res.body.userdata.currentUser.user).to.deep.equal(dataset.currentUser.user)
-		 //expect(res.body.userdata.currentUser.userdata.lastQuizData).to.deep.equal(dataset..currentUser.lastQuizData)
+         expect(res.body.currentUser.user.username).to.equal(dataset.currentUser.user.username);
+		 expect(res.body.currentUser.userData.missedQuestions.toString()).to.equal(dataset.currentUser.userData.missedQuestions.toString());
+		 expect(res.body.currentUser.userData.numberOfQuizzes.toString()).to.equal(dataset.currentUser.userData.numberOfQuizzes.toString());
+		 expect(res.body.currentUser.userData.totalQuestions.toString()).to.equal(dataset.currentUser.userData.totalQuestions.toString());
+		 expect(res.body.currentUser.userData.totalCorrect.toString()).to.equal(dataset.currentUser.userData.totalCorrect.toString());
+		 expect(res.body.currentUser.userData.jsQuestionsAnswered.toString()).to.equal(dataset.currentUser.userData.jsQuestionsAnswered.toString());
+		 expect(res.body.currentUser.userData.jsQuestionsCorrect.toString()).to.equal(dataset.currentUser.userData.jsQuestionsCorrect.toString());
+		 expect(res.body.currentUser.userData.cssQuestionsAnswered.toString()).to.equal(dataset.currentUser.userData.cssQuestionsAnswered.toString());
+		 expect(res.body.currentUser.userData.cssQuestionsCorrect.toString()).to.equal(dataset.currentUser.userData.cssQuestionsCorrect.toString());
+		 expect(res.body.currentUser.userData.htmlQuestionsAnswered.toString()).to.equal(dataset.currentUser.userData.htmlQuestionsAnswered.toString());
+		 expect(res.body.currentUser.userData.htmlQuestionsCorrect.toString()).to.equal(dataset.currentUser.userData.htmlQuestionsCorrect.toString());
+		 expect(res.body.currentUser.userData.nodeQuestionsAnswered.toString()).to.equal(dataset.currentUser.userData.nodeQuestionsAnswered.toString());
+		 expect(res.body.currentUser.userData.nodeQuestionsCorrect.toString()).to.equal(dataset.currentUser.userData.nodeQuestionsCorrect.toString());
+		 expect(res.body.currentUser.userData.apiQuestionsAnswered.toString()).to.equal(dataset.currentUser.userData.apiQuestionsAnswered.toString());
+		 expect(res.body.currentUser.userData.apiQuestionsCorrect.toString()).to.equal(dataset.currentUser.userData.apiQuestionsCorrect.toString());
+		 expect(res.body.currentUser.userData.mongoQuestionsAnswered.toString()).to.equal(dataset.currentUser.userData.mongoQuestionsAnswered.toString());
+		 expect(res.body.currentUser.userData.mongoQuestionsCorrect.toString()).to.equal(dataset.currentUser.userData.mongoQuestionsCorrect.toString());
+		 expect(res.body.currentUser.user.firstName).to.equal(dataset.currentUser.user.firstName)
+		 expect(res.body.currentUser.user.lastName).to.equal(dataset.currentUser.user.lastName)
+		 expect(res.body.currentUser.user.password).to.equal(dataset.currentUser.user.password)
+		 expect(res.body.currentUser.user.username).to.equal(dataset.currentUser.user.username)
+		 expect(res.body.currentUser.lastQuizData.totalQuestions.toString()).to.deep.equal(dataset.currentUser.lastQuizData.totalQuestions.toString())
+		 expect(res.body.currentUser.lastQuizData.dateOfQuiz.toString()).to.deep.equal(dataset.currentUser.lastQuizData.dateOfQuiz.toString())
+		 expect(res.body.currentUser.lastQuizData.totalCorrect.toString()).to.deep.equal(dataset.currentUser.lastQuizData.totalCorrect.toString())
        })
    })
 

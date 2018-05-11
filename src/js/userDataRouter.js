@@ -32,13 +32,15 @@ router.get('/', (req, res) => {
 router.get('/:username', (req, res) => {
   return UserData
   //.findById(req.params.id)
-  .find({"currentUser.user.username": req.params.username})
+  .findOne({"currentUser.user.username": req.params.username})
   .exec()
   .then(userdata => {
-    console.log("API  --userData: ", userdata[0].currentUser.user.username);
-    res.json({
-      userdata: userdata[0].apiRepr()
-    })
+    //console.log("API  --userData: ", userdata[0].currentUser.user.username);
+    console.log("API  --userData: ", userdata);
+	res.json(userdata.apiRepr())
+    //res.json({
+    //  userdata: userdata.apiRepr()
+    //})
   })
   .catch(err => {
     console.log('MESSAGE: ', err.message);
@@ -185,7 +187,7 @@ router.put('/:id', jsonParser, (req, res) => {
 
   const updatedLastQuizData = {
         "totalQuestions": req.body.lastQuizData.totalQuestions,
-        "dateOfQuiz": req.body.lastQuizData.dateOfQuiz,
+        "dateOfQuiz": new Date().toString(),
         "totalCorrect": req.body.lastQuizData.totalCorrect
       }
 
