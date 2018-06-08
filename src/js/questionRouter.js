@@ -28,7 +28,7 @@ router.get('/', (req,res) => {
 // can also request by ID
 //////////////////////////
 router.get('/:id', (req, res) => {
-  console.log("**REQ ",req.params);
+  //console.log("**REQ ",req.params);
   Question
     // this is a convenience method Mongoose provides for searching
     // by the object _id property
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
 ////////////////////////////
 router.post('/', (req, res) => {
 
-  console.log("Hitting Questions POST endpoint...");
+  //console.log("Hitting Questions POST endpoint...");
   const requiredFields = ['number', 'question', 'category', 'assetUrl', 'type', 'answers'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];

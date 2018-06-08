@@ -21,8 +21,8 @@ router.get('/', (req, res) => {
     })
   })
   .catch(err => {
-    console.log('MESSAGE: ', err.message);
-    console.error('DETAILS: ',err);
+    //console.log('Error: ', err.message);
+    //console.error('DETAILS: ',err);
     res.status(500).json({error: 'something went terribly wrong'});
   });
 });
@@ -36,15 +36,15 @@ router.get('/:username', (req, res) => {
   .exec()
   .then(userdata => {
     //console.log("API  --userData: ", userdata[0].currentUser.user.username);
-    console.log("API  --userData: ", userdata);
+    //console.log("API  --userData: ", userdata);
 	res.json(userdata.apiRepr())
     //res.json({
     //  userdata: userdata.apiRepr()
     //})
   })
   .catch(err => {
-    console.log('MESSAGE: ', err.message);
-    console.error('DETAILS: ',err);
+    //console.log('MESSAGE: ', err.message);
+    //console.error('DETAILS: ',err);
     res.status(500).json({error: 'something went terribly wrong'});
   });
 });
@@ -121,7 +121,7 @@ router.put('/:id', jsonParser, (req, res) => {
       error: 'Request path id and request body id values must match'
     });
   }
-  console.log("***API: hitting PUT method with userData.id: ", req.params.id);
+  //console.log("***API: hitting PUT method with userData.id: ", req.params.id);
 
   // ## these are the required keys for each object we're receiving
   const requiredUserDataObjects = ["user", "userData", "lastQuizData"];
@@ -219,7 +219,7 @@ router.put('/:id', jsonParser, (req, res) => {
           res.status(204).end();
         })
         .catch(err => {
-          console.log("ERROR: ",err);
+          //console.log("ERROR: ",err);
           return res.status(500).json({ message: 'X---Internal server error' });
         })
     })

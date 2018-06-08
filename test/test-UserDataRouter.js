@@ -166,8 +166,8 @@ describe('Userdata API', function() {
            .get(`/api/userdata/${dataset.currentUser.user.username}`);
        })
        .then(res => {
-	     console.log("RES.body.currentUser.user",res.body.currentUser.userData);
-	     console.log("dataset.currentUser.user",dataset.currentUser.userData);
+	     //console.log("RES.body.currentUser.user",res.body.currentUser.userData);
+	     //console.log("dataset.currentUser.user",dataset.currentUser.userData);
          expect(res).to.have.status(200);
          expect(res.body.currentUser.user.username).to.equal(dataset.currentUser.user.username);
 		 expect(res.body.currentUser.userData.missedQuestions.toString()).to.equal(dataset.currentUser.userData.missedQuestions.toString());

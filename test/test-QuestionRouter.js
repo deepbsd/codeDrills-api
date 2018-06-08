@@ -76,11 +76,11 @@ function seedFakeQuestions(num=10) {
     newData = generateSingleQuestion();
     seedData.push(newData);
   }
-  console.log("##returning Question.insertMany seedData: ")
+  //console.log("##returning Question.insertMany seedData: ")
   // this will return a promise
   return Question.insertMany(seedData)
   .then( data => {
-    console.log("**seedData made it: ");
+    console.log("Successfully seed data...");
   })
   .catch(err => {
     console.log("Seeding Error: ",err);
@@ -97,7 +97,7 @@ describe('Question API', function() {
   });
 
   beforeEach(function(){
-    console.log("calling seedFakeQuestions() from beforeEach()...")
+    //console.log("calling seedFakeQuestions() from beforeEach()...")
     return seedFakeQuestions();
   })
 
