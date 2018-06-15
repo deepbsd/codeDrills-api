@@ -37,7 +37,8 @@ function generateUserData(){
     username: faker.internet.userName(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
-    password: generatePassword()
+    password: generatePassword(),
+    email: faker.internet.email()
   };
 }
 
@@ -167,13 +168,14 @@ describe('User API', function() {
         expect(res).to.have.status(201);
         expect(res).to.be.json;
         expect(res.body).to.be.a('object');
-        expect(res.body).to.include.keys('username', 'firstName', 'lastName');
+        expect(res.body).to.include.keys('username', 'firstName', 'lastName', 'email');
         expect(res.body.id).to.not.equal(null);
         // response should be deep equal to `newItem` from above if we assign
         // `id` to it from `res.body.id`
         expect(res.body.username).to.equal(newUser.username);
         expect(res.body.firstName).to.equal(newUser.firstName);
         expect(res.body.lastName).to.equal(newUser.lastName);
+        expect(res.body.email).to.equal(newUser.email);
       })
       .catch(err => {
         console.log("There was a POST error!", err)

@@ -94,11 +94,12 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  let {username, password, firstName = '', lastName = ''} = req.body;
+  let {username, password, firstName = '', lastName = '', email = ''} = req.body;
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
+  email = email.trim();
 
   return User.find({username})
     .count()
@@ -120,7 +121,8 @@ router.post('/', jsonParser, (req, res) => {
         username,
         password: hash,
         firstName,
-        lastName
+        lastName,
+        email
       });
     })
     .then(user => {
@@ -166,6 +168,47 @@ router.get('/:id', (req,res) => {
     })
     .catch( err => res.status(500).json( {message: 'No such user!'}));
 });
+
+// *** UPDATE a user ***
+router.put('/:id', (req, res) => {
+
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)){
+        return res.status(400).json({
+            error: 'Request path id and request body id values must match'
+        });
+    }
+    // Required keys for user object we're updating
+    const requiredUserFields = ["username","firstName","lastName","email"];
+
+    // req.body must contain all the required fields
+    requiredUserFields.forEach(name => {
+        if (!(Object.keys(req.body).includes(name))){
+            const message = `Missing ${name} in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    })
+
+    const updatedUserData = {
+        "username": req.body.username,
+        "firstName": req.body.firstName,
+        "lastName": req.body.lastName,
+        "email": req.body.email
+    }
+
+  return User
+    .findByIdAndUpdate(req.params.id, {$set: updatedUserData}, {new: true})
+    .then(() => {
+      console.log("It's updated!")
+      res.status(204).json({ message: "Success! User Updated."});
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: "User Update Failed! Big problem here..."});
+    });
+});
+
+
 
 // *** DELETE a user ***
 router.delete('/:id', (req, res) => {
