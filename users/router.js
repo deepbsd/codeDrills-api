@@ -182,12 +182,12 @@ router.put('/:id', (req, res) => {
     const updatedUserFields = Object.keys(req.body);
     const fieldsToUpdate = {};
 
-    // req.body must contain all the required fields
+    // req.body may contain only required fields
     updatedUserFields.forEach(name => {
         if (name === "id"){
             return;
         } else if (!(changeableUserFields.includes(name))) {
-            const message = `Missing ${name} not able to be updated.`;
+            const message = `Field ${name} not able to be updated.`;
             console.error(message);
             return res.status(400).send(message);
         } else {
