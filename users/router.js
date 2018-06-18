@@ -178,26 +178,27 @@ router.put('/:id', (req, res) => {
         });
     }
     // Required keys for user object we're updating
-    const requiredUserFields = ["username","firstName","lastName","email"];
+    const changeableUserFields = ["firstName","lastName","email"];
+    const updatedUserFields = Object.keys(req.body);
+    const fieldsToUpdate = {};
 
     // req.body must contain all the required fields
-    requiredUserFields.forEach(name => {
-        if (!(Object.keys(req.body).includes(name))){
-            const message = `Missing ${name} in request body`;
+    updatedUserFields.forEach(name => {
+        if (name === "id"){
+            return;
+        } else if (!(changeableUserFields.includes(name))) {
+            const message = `Missing ${name} not able to be updated.`;
             console.error(message);
             return res.status(400).send(message);
+        } else {
+            fieldsToUpdate[name] = req.body[name];
         }
     })
 
-    const updatedUserData = {
-        "username": req.body.username,
-        "firstName": req.body.firstName,
-        "lastName": req.body.lastName,
-        "email": req.body.email
-    }
+    console.log("Updating for: ",req.body.id," values: ", fieldsToUpdate);
 
   return User
-    .findByIdAndUpdate(req.params.id, {$set: updatedUserData}, {new: true})
+    .findByIdAndUpdate(req.params.id, {$set: fieldsToUpdate}, {new: true})
     .then(() => {
       console.log("It's updated!")
       res.status(204).json({ message: "Success! User Updated."});
