@@ -184,6 +184,38 @@ describe('User API', function() {
 
   const newItem = generateUserData();
 
+  it('should update an item on PUT', function() {
+      const newEmail = "abc@xyz.com";
+	  let origUser, testUser = {};
+
+	  return User
+	    .findOne()
+	    .then(_user => {
+           origUser = _user;
+	  	   testUser.id = _user.id;
+           testUser.email = newEmail;
+           //console.log("origUser: ", origUser);
+           return chai.request(app)
+             .put(`/api/users/${testUser.id}`)
+             .send(testUser)
+        })
+      .then(function(res){
+          expect(res).to.have.status(204);
+          return User.findById(testUser.id);
+      })
+      .then(function(userData){
+          //console.log("Users data is: ",userData);
+          expect(userData.email).to.equal(newEmail);
+          expect(userData.firstName).to.equal(origUser.firstName);
+          expect(userData.lastName).to.equal(origUser.lastName);
+          expect(userData.username).to.equal(origUser.username);
+      })
+      .catch(function(err){
+          console.error("PUT Error: ",err);
+      })
+  })
+
+
   it('should delete an item on DELETE', function() {
     // console.log("**Payload: ", newItem);
     return chai.request(app)
