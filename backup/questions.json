@@ -48,7 +48,7 @@
   "type": "multipleChoice",
   "question": "What is the difference between classes and IDs in CSS?",
   "answers": [
-    {"answerText": "Use IDs to target one element, styles to target many elements", "chosen": false, "correct": true},
+    {"answerText": "Use IDs to target one element, classes to target many elements", "chosen": false, "correct": true},
     {"answerText": "Classes are classier than ids.", "chosen": false},
     {"answerText": "IDs target many elements, classes target one element.", "chosen": false},
     {"answerText": "Both IDs and classes can target either one or many elements.", "chosen": false},
