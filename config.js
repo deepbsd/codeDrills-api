@@ -5,7 +5,7 @@ exports.DATABASE_URL = process.env.DATABASE_URL ||
 exports.TEST_DATABASE_URL = (
    process.env.TEST_DATABASE_URL ||
    //'mongodb://localhost/testapi');
-   'mongodb://deepbsd:2D33p4m3!@ds115758.mlab.com:15758/codedrills/testapi';
+   'mongodb://deepbsd:2D33p4m3!@ds115758.mlab.com:15758/codedrills/testapi');
 
 
 exports.PORT = process.env.PORT || 4000;
