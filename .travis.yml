@@ -1,5 +1,6 @@
 language: node_js
-node_js: node
+node_js: 
+    - "9.11.2"
 services:
 - mongodb
 deploy:
@@ -9,3 +10,4 @@ deploy:
   app: murmuring-badlands-58055
   on:
     repo: deepbsd/codeDrills-api
+
