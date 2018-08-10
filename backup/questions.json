@@ -4,7 +4,7 @@
   "category": "html",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "Why is it generally a good idea to position CSS <link>s between <head></head> and JS <script>s just before </body>?",
+  "question": "Why is it generally a good idea to position CSS <link>'s between <head></head> and JS <script>'s just before </body>?",
   "answers": [
     {"answerText": "To have the CSS ready so the page can render properly yet not try to execute the JS until the page elements have fully rendered", "chosen": false, "correct": true},
     {"answerText": "It doesn't really matter where you put them.", "chosen": false},
@@ -23,7 +23,7 @@
     {"answerText": "The <!DOCTYPE> declaration is not an HTML tag; it is an instruction to the web browser about what version of HTML the page is written in.", "chosen": false, "correct": true},
     {"answerText": "This includes the Data Transfer Delimiter for HTTP methods.", "chosen": false},
     {"answerText": "I don't always need this for the browser to know what version of HTML I am using.", "chosen": false},
-    {"answerText": "Specifies the Document Type Definition (DTD) and its version in HTML5.", "chosen": false},
+    {"answerText": "Specifies the Document Type Definition (DTD) and its version in HTML4.", "chosen": false},
     {"answerText": "HTML 4.01 and HTML 5 both require a reference to the DTD in the doctype declaration.", "chosen": false}
   ]
 }
@@ -64,7 +64,7 @@
   "answers": [
     {"answerText": "Box2 and Box3 are floated left inside an enclosing div. Box1 is outside that enclosing div.  Float is cleared before Box4.", "chosen": false, "correct": true},
     {"answerText": "There are no child divs here, only the parent.", "chosen": false},
-    {"answerText": "There are two sets of child divs.", "chosen": false},
+    {"answerText": "There are five sets of child divs.", "chosen": false},
     {"answerText": "Float is cleared after Box4.", "chosen": false},
     {"answerText": "There's no floating allowed here.", "chosen": false}
   ]
@@ -77,7 +77,7 @@
   "question": "What does * { box-sizing: border-box; } do? What are its advantages?",
   "answers": [
     {"answerText": "You don't have to include margin and padding in height/width size percentages in any divs.", "chosen": false, "correct": true},
-    {"answerText": "It's the same as for content-box as var as height/width percentage measurements go in any divs.", "chosen": false},
+    {"answerText": "It's the same as for content-box as far as height/width percentage measurements go in any divs.", "chosen": false},
     {"answerText": "The border value for all divs will receive a default value.", "chosen": false},
     {"answerText": "The position value for all divs will be set to absolute.", "chosen": false},
     {"answerText": "The border value for all divs cannot be set dynamically.", "chosen": false}
@@ -90,7 +90,7 @@
   "type": "multipleChoice",
   "question": "What's the difference between inline and inline-block and block?",
   "answers": [
-    {"answerText": "Inline is default, everything on single line; inline-block allows elements on line but allows height and width measurements as with block items; block is how divs and sections are treated by default.", "chosen": false, "correct": true},
+    {"answerText": "Inline is default, everything on a single line; inline-block allows elements on line but allows height and width measurements as with block items; block is how divs and sections are treated by default.", "chosen": false, "correct": true},
     {"answerText": "Both inline and inline-block allow height and width measurements; block elements can appear inline.", "chosen": false},
     {"answerText": "They're basically all the same.", "chosen": false},
     {"answerText": "The differences disappear when you give an element height and width values.", "chosen": false},
@@ -104,7 +104,7 @@
   "type": "multipleChoice",
   "question": "Describe pseudo-elements and discuss what they are used for.",
   "answers": [
-    {"answerText": "A CSS pseudo-element is used to style specified parts of an element. For example, it can be used to: Style the first letter, or line, of an element. Insert content before, or after, the content of an element.", "chosen": false, "correct": true},
+    {"answerText": "A CSS pseudo-element is used to style specified parts of an element. For example, it can be used to: Style the first letter, or line, of an element; Insert content before, or after, the content of an element.", "chosen": false, "correct": true},
     {"answerText": "CSS pseudo-elements should not be used in best practice--only use authentic elements.", "chosen": false},
     {"answerText": "You would not use a pseudo-element to describe the behavior of an element during a hover action.", "chosen": false},
     {"answerText": "You can't use pseudo-elements to target child elements.", "chosen": false},
@@ -135,7 +135,7 @@
     {"answerText": "Defining a method on a prototype object with an arrow function will throw an error.", "chosen": false, "correct": true},
     {"answerText": "There's never a problem using an arrow function on a click handler.", "chosen": false},
     {"answerText": "Go ahead and use an arrow function to define an object method.", "chosen": false},
-    {"answerText": "An arrow function is useful anywhere you need 'this' is defined.", "chosen": false},
+    {"answerText": "An arrow function is useful anywhere you need 'this' to be defined.", "chosen": false},
     {"answerText": "The context of 'this' is unimportant with arrow functions.", "chosen": false}
   ]
 }
