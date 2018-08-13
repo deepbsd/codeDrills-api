@@ -23,7 +23,7 @@ pass='2D33p4m3!'
 #mongoexport --db $db --collection $collection -o $local_file
 
 # import into mlab database
-#mongoimport -h $remote_host:$remote_port -d $db -c $collection -u $user -p $pass --drop --file $local_file
-mongoimport -h $local_host -d $db -c $collection  --drop --file $local_file
+mongoimport -h $remote_host:$remote_port -d $db -c $collection -u $user -p $pass --drop --file $local_file
+#mongoimport -h $local_host -d $db -c $collection  --drop --file $local_file
 
 

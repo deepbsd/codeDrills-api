@@ -202,11 +202,11 @@
   "type": "multipleChoice",
   "question": "Which is an example of Promise in jQuery.",
   "answers": [
+    {"answerText": "All of these answers.", "chosen": false, "correct": true},
     {"answerText": "$( 'div' ).promise().done(function() { $( 'p' ).append( ' Finished! ' ); });", "chosen": false},
     {"answerText": "var div = $( '<div>' ); div.promise().done( ( arg1 ) => {  alert( this === div && arg1 === div ); });", "chosen": false},
     {"answerText": "var promise = $.ajax({ url: '/serverEndpoint'}); promise.done(successFunction); promise.fail(errorFunction); promise.always(alwaysFunction);", "chosen": false},
-    {"answerText": "var promise = $.ajax({ url: '/serverEndpoint'}); promise.then(successFunction, errorFunction);", "chosen": false},
-    {"answerText": "All of these answers.", "chosen": false, "correct": true}
+    {"answerText": "var promise = $.ajax({ url: '/serverEndpoint'}); promise.then(successFunction, errorFunction);", "chosen": false}
   ]
 }
 {
@@ -318,7 +318,7 @@
     {"answerText": "Because there's a special switch in the browser for this output.", "chosen": false},
     {"answerText": "Because Node is only compatable with some browsers.", "chosen": false},
     {"answerText": "The output comes asychronously, so you don't see it in the browser until later.", "chosen": false},
-    {"answerText": "You can see it in the Apache webserver logs.", "chosen": false}
+    {"answerText": "You won't see it in the Apache webserver logs.", "chosen": false}
   ]
 }
 {
