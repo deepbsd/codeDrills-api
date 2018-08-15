@@ -354,7 +354,7 @@
   "category": "node",
   "assetUrl": null,
   "type": "multipleChoice",
-  "question": "Would gulp be a development depenency or a production dependency?",
+  "question": "Would gulp be a development depdenency or a production dependency?",
   "answers": [
     {"answerText": "A development dependency because it's not required by the production server.", "chosen": false, "correct": true},
     {"answerText": "A production dependency because it runs on the server.", "chosen": false},
@@ -373,8 +373,8 @@
     {"answerText": "They're all correct", "chosen": false, "correct": true},
     {"answerText": "require/module.exports", "chosen": false},
     {"answerText": "import {module} from './module' /export default module", "chosen": false},
-    {"answerText": "import/export", "chosen": false},
-    {"answerText": "const {module} = require('./modulename')/export {module}", "chosen": false}
+    {"answerText": "const {module} = require('./modulename')/export {module}", "chosen": false},
+    {"answerText": "import * as myModule from './module' /export module", "chosen": false}
   ]
 }
 {
@@ -414,8 +414,8 @@
   "answers": [
     {"answerText": "Representational State Transfer, where state is transferred as an object.", "chosen": false, "correct": true},
     {"answerText": "It means have compassion and don't work too hard--take breaks often.", "chosen": false},
-    {"answerText": "Relatively Synchronous Transfer of a state object.", "chosen": false},
-    {"answerText": "Relational State Transfer, where state is transferred as an object.", "chosen": false},
+    {"answerText": "RElatively Synchronous Transfer of a state object.", "chosen": false},
+    {"answerText": "RElational State Transfer, where state is transferred as an object.", "chosen": false},
     {"answerText": "That the DOM always remembers what it looked like 10 minutes ago.", "chosen": false}
   ]
 }
@@ -482,10 +482,10 @@
   "type": "multipleChoice",
   "question": "What is a namespace in MongoDB?",
   "answers": [
-    {"answerText": "The namespace is a combination of the database name and the name of the collection or index...", "chosen": false, "correct": true},
+    {"answerText": "The namespace is a combination of the database name and the name of the collection or index.", "chosen": false, "correct": true},
     {"answerText": "The place that holds all the object ids.", "chosen": false},
     {"answerText": "A namespace is where only variable names that have been hoisted reside.", "chosen": false},
-    {"answerText": "Event names that have been propagated wind up in the MongoDBs namespace.", "chosen": false},
+    {"answerText": "Event names that have been propagated wind up in the MongoDB namespace.", "chosen": false},
     {"answerText": "This is where the names of the authors of MongoDB are kept.", "chosen": false}
   ]
 }
@@ -525,7 +525,7 @@
   "question": "What are endpoints?",
   "answers": [
     {"answerText": "Part of the URL after the domain where the router hands the browser to a different program on the website. ", "chosen": false, "correct": true},
-    {"answerText": "That's where the API stops.", "chosen": false},
+    {"answerText": "That's where there's no API anymore.", "chosen": false},
     {"answerText": "The browser URL uses endpoints for server side PHP programs--endpoints don't apply to other server side languages.", "chosen": false},
     {"answerText": "Endpoints are where the server and the client share only JSON data.", "chosen": false},
     {"answerText": "They have something to do with the URL and that back-end server stuff.", "chosen": false}
