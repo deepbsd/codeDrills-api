@@ -370,11 +370,11 @@
   "type": "multipleChoice",
   "question": "Choose the correct pair",
   "answers": [
+    {"answerText": "They're all correct", "chosen": false, "correct": true},
     {"answerText": "require/module.exports", "chosen": false},
     {"answerText": "import {module} from './module' /export default module", "chosen": false},
     {"answerText": "import/export", "chosen": false},
-    {"answerText": "const {module} = require('./modulename')/export {module}", "chosen": false},
-    {"answerText": "They're all correct", "chosen": false, "correct": true}
+    {"answerText": "const {module} = require('./modulename')/export {module}", "chosen": false}
   ]
 }
 {
