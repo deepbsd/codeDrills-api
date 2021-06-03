@@ -16,7 +16,7 @@ local_file='users.json'
 # (formerly mlab) Atlas!
 #remote_host='ds115758.mlab.com'
 #remote_host='mongodb+srv://codedrills.zm5qb.mongodb.net/codeDrills'
-remote_host="mongodb+srv://deepbsd:$pass@codedrills.zm5qb.mongodb.net/codeDrills"
+remote_host="mongodb+srv://$user:$pass@codedrills.zm5qb.mongodb.net/codeDrills"
 #remote_port=15758
 #remote_port=15758
 db='codeDrills'
