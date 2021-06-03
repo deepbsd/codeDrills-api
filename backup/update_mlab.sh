@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# For the GunBase project this script creates a JSON duplicate of the local
+# For the codeDrills project this script creates a JSON duplicate of the local
 # Mongo DB collection being used and updates the remote MLab DB collection so it
 # is in sync with the local database.
 
