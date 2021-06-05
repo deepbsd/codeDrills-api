@@ -86,7 +86,8 @@ app.use('*', (req, res) => {
 // From Matthew...
 // set options as per http://mongoosejs.com/docs/connections.html#use-mongo-client
 const options = {
-  useMongoClient: true,
+  //useMongoClient: true,
+  useNewUrlParser: true,
   autoIndex: false, // Don't build indexes
   reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
   reconnectInterval: 500, // Reconnect every 500ms
