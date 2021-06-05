@@ -87,6 +87,7 @@ app.use('*', (req, res) => {
 // set options as per http://mongoosejs.com/docs/connections.html#use-mongo-client
 const options = {
   //useMongoClient: true,
+  useUnifiedTopology: true,
   useNewUrlParser: true,
   autoIndex: false, // Don't build indexes
   reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
